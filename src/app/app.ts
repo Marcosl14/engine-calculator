@@ -16,4 +16,7 @@ export class App {
   goToPistonKinematics() {
     this.router.navigate(['/piston-kinematics']);
   }
+  goToTubingResonance() {
+    this.router.navigate(['/tubing-resonance']);
+  }
 }

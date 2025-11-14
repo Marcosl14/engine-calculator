@@ -1,0 +1,88 @@
+<h1>Análisis de Movimiento del Pistón</h1>
+
+<div class="container">
+  <div class="motor-inputs">
+    <h3>Motor 1</h3>
+    <div class="input-group">
+      <label for="pistonDiameter1">Diámetro del pistón (mm):</label>
+      <input type="number" id="pistonDiameter1" [(ngModel)]="engine1.pistonDiameter" />
+    </div>
+    <div class="input-group">
+      <label for="stroke1">Carrera (mm):</label>
+      <input type="number" id="stroke1" [(ngModel)]="engine1.stroke" />
+    </div>
+    <div class="input-group">
+      <label for="connectingRodLength1">Largo de biela (mm):</label>
+      <input type="number" id="connectingRodLength1" [(ngModel)]="engine1.connectingRodLength" />
+    </div>
+    <div class="input-group">
+      <label for="pistonOffset1">Descentrado del perno (mm):</label>
+      <input type="number" id="pistonOffset1" [(ngModel)]="engine1.pistonOffset" />
+    </div>
+    <div class="input-group">
+      <label for="combustionChamberVolume1">Volumen de cámara (cm³):</label>
+      <input
+        type="number"
+        id="combustionChamberVolume1"
+        [(ngModel)]="engine1.combustionChamberVolume"
+      />
+    </div>
+    <div class="input-group">
+      <label for="engineRPM1">Revoluciones del motor (1/min o RPM):</label>
+      <input type="number" id="engineRPM1" [(ngModel)]="engine1.engineRPM" />
+    </div>
+  </div>
+
+  <div class="motor-inputs">
+    <h3>Motor 2</h3>
+    <div class="input-group">
+      <label for="pistonDiameter2">Diámetro del pistón (mm):</label>
+      <input type="number" id="pistonDiameter2" [(ngModel)]="engine2.pistonDiameter" />
+    </div>
+    <div class="input-group">
+      <label for="stroke2">Carrera (mm):</label>
+      <input type="number" id="stroke2" [(ngModel)]="engine2.stroke" />
+    </div>
+    <div class="input-group">
+      <label for="connectingRodLength2">Largo de biela (mm):</label>
+      <input type="number" id="connectingRodLength2" [(ngModel)]="engine2.connectingRodLength" />
+    </div>
+    <div class="input-group">
+      <label for="pistonOffset2">Descentrado del perno (mm):</label>
+      <input type="number" id="pistonOffset2" [(ngModel)]="engine2.pistonOffset" />
+    </div>
+    <div class="input-group">
+      <label for="combustionChamberVolume2">Volumen de cámara (cm³):</label>
+      <input
+        type="number"
+        id="combustionChamberVolume2"
+        [(ngModel)]="engine2.combustionChamberVolume"
+      />
+    </div>
+    <div class="input-group">
+      <label for="engineRPM2">Revoluciones del motor (1/min o RPM):</label>
+      <input type="number" id="engineRPM2" [(ngModel)]="engine2.engineRPM" />
+    </div>
+  </div>
+</div>
+
+<button id="calculateAndGraph" (click)="calculateAndGraph()">Calcular y Graficar</button>
+
+<div class="charts-container">
+  <div class="chart-wrapper">
+    <h3>Posición del Pistón</h3>
+    <canvas id="positionChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <h3>Velocidad del Pistón</h3>
+    <canvas id="velocityChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <h3>Aceleración del Pistón</h3>
+    <canvas id="accelerationChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <h3>Volumen del Cilindro</h3>
+    <canvas id="volumeChart"></canvas>
+  </div>
+</div>

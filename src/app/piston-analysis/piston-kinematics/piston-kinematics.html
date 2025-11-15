@@ -68,6 +68,33 @@
 
 <button id="calculateAndGraph" (click)="calculateAndGraph()">Calcular y Graficar</button>
 
+<div class="results-container" *ngIf="engine1Volume !== null && engine2Volume !== null">
+  <div class="result-wrapper">
+    <h3>Volumen Motor 1 (cm³)</h3>
+    <p>{{ engine1Volume | number : '1.2-2' }} cm³</p>
+    <h3>Diametro del Cilindro vs Carrera</h3>
+    <p>
+      {{
+        cilinderDiameterVsStrokeRelation1 +
+          ' = ' +
+          cilinderDiameterVsStrokeRelation1Type?.toUpperCase()
+      }}
+    </p>
+  </div>
+  <div class="result-wrapper">
+    <h3>Volumen Motor 2 (cm³)</h3>
+    <p>{{ engine2Volume | number : '1.2-2' }} cm³</p>
+    <h3>Diametro del Cilindro vs Carrera</h3>
+    <p>
+      {{
+        cilinderDiameterVsStrokeRelation2 +
+          ' = ' +
+          cilinderDiameterVsStrokeRelation2Type?.toUpperCase()
+      }}
+    </p>
+  </div>
+</div>
+
 <div class="charts-container">
   <div class="chart-wrapper">
     <h3>Posición del Pistón</h3>

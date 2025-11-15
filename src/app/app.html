@@ -1,4 +1,9 @@
 <style>
+  .active-tab {
+    background-color: #4c53af;
+    color: white;
+  }
+
   main {
     width: 100%;
     min-height: 100%;
@@ -9,16 +14,22 @@
     box-sizing: inherit;
     position: relative;
   }
-
-  .content {
-    width: 100%;
-  }
 </style>
 
 <main class="main">
   <nav>
-    <button (click)="goToPistonKinematics()">Piston Kinematic</button>
-    <button (click)="goToTubingResonance()">Tubing Resonance</button>
+    <button
+      (click)="goToPistonKinematics()"
+      [class.active-tab]="activeTab === routes.pistonKinematics"
+    >
+      Piston Kinematic
+    </button>
+    <button
+      (click)="goToTubingResonance()"
+      [class.active-tab]="activeTab === routes.tubingResonance"
+    >
+      Tubing Resonance
+    </button>
   </nav>
 </main>
 

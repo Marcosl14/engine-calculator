@@ -10,6 +10,19 @@ enum CilinderDiameterVsStrokeRelationType {
   OVER_SQUARED = 'carrera corta',
 }
 
+enum RodStrokeRatioCharacteristicType {
+  VERY_SHORT = 'muy corta',
+  SHORT = 'corta',
+  MODERATE = 'moderada',
+  LONG = 'larga',
+  VERY_LONG = 'muy larga',
+}
+
+interface RodStrokeCharacteristics {
+  type: RodStrokeRatioCharacteristicType;
+  description: string;
+}
+
 @Component({
   selector: 'app-piston-kinematics',
   imports: [CommonModule, FormsModule],
@@ -33,6 +46,11 @@ export class PistonKinematics implements OnInit {
 
   public cilinderDiameterVsStrokeRelation1Type: CilinderDiameterVsStrokeRelationType | null = null;
   public cilinderDiameterVsStrokeRelation2Type: CilinderDiameterVsStrokeRelationType | null = null;
+
+  public rodStrokeRatio1: number | null = null;
+  public rodStrokeRatio2: number | null = null;
+  public rodStrokeRatioCharacteristics1: RodStrokeCharacteristics | null = null;
+  public rodStrokeRatioCharacteristics2: RodStrokeCharacteristics | null = null;
 
   private readonly baseChartOptions = {
     responsive: true,
@@ -175,6 +193,18 @@ export class PistonKinematics implements OnInit {
         this.engine2.combustionChamberVolume;
     }
 
+    this.rodStrokeRatio1 =
+      Math.round((this.engine1.connectingRodLength / this.engine1.stroke) * 100) / 100;
+    this.rodStrokeRatio2 =
+      Math.round((this.engine2.connectingRodLength / this.engine2.stroke) * 100) / 100;
+
+    this.rodStrokeRatioCharacteristics1 = this.getRodStrokeRatioCharacteristics(
+      this.rodStrokeRatio1
+    );
+    this.rodStrokeRatioCharacteristics2 = this.getRodStrokeRatioCharacteristics(
+      this.rodStrokeRatio2
+    );
+
     this.updateChartData(
       this.positionChart,
       this.generatePointSets(data1.positions),
@@ -208,6 +238,30 @@ export class PistonKinematics implements OnInit {
       default:
         return CilinderDiameterVsStrokeRelationType.SQUARED;
     }
+  }
+
+  private getRodStrokeRatioCharacteristics(ratio: number): RodStrokeCharacteristics {
+    if (ratio < 1.4)
+      return {
+        type: RodStrokeRatioCharacteristicType.VERY_SHORT,
+        description: 'Alta velocidad pistón, alto desgaste',
+      };
+    if (ratio < 1.6)
+      return {
+        type: RodStrokeRatioCharacteristicType.SHORT,
+        description: 'Alta potencia, alta aceleración pistón',
+      };
+    if (ratio < 1.8)
+      return { type: RodStrokeRatioCharacteristicType.MODERATE, description: 'Balanceado' };
+    if (ratio < 2.0)
+      return {
+        type: RodStrokeRatioCharacteristicType.LONG,
+        description: 'Bajo desgaste, buena eficiencia',
+      };
+    return {
+      type: RodStrokeRatioCharacteristicType.VERY_LONG,
+      description: 'Máxima eficiencia, baja velocidad pistón',
+    };
   }
 
   private generatePointSets(data: number[]): { x: number; y: number }[] {

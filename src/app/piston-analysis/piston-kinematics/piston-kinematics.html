@@ -85,6 +85,14 @@
     </p>
     <h3>Relación de Compresión</h3>
     <p *ngIf="compressionRatio1">{{ compressionRatio1 | number : '1.2-2' }} : 1</p>
+    <h3>Relación Biela/Carrera</h3>
+    <p *ngIf="rodStrokeRatio1">
+      {{ rodStrokeRatio1 | number : '1.2-2' }} =
+      {{ rodStrokeRatioCharacteristics1?.type?.toUpperCase() }}
+    </p>
+    <label *ngIf="rodStrokeRatio1" class="result-comment">
+      {{ rodStrokeRatioCharacteristics1?.description }}
+    </label>
   </div>
   <div class="result-wrapper">
     <h3>Volumen Motor 2 (cm³)</h3>
@@ -99,6 +107,14 @@
     </p>
     <h3>Relación de Compresión</h3>
     <p *ngIf="compressionRatio2">{{ compressionRatio2 | number : '1.2-2' }} : 1</p>
+    <h3>Relación Biela/Carrera</h3>
+    <p *ngIf="rodStrokeRatio2">
+      {{ rodStrokeRatio2 | number : '1.2-2' }} =
+      {{ rodStrokeRatioCharacteristics2?.type?.toUpperCase() }}
+    </p>
+    <label *ngIf="rodStrokeRatio1" class="result-comment">
+      {{ rodStrokeRatioCharacteristics2?.description }}
+    </label>
   </div>
 </div>
 

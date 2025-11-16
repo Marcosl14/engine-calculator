@@ -74,3 +74,8 @@ canvas {
   font-weight: bold;
   color: #007bff;
 }
+
+.result-comment {
+  font-size: 1rem;
+  color: rgb(165, 0, 0);
+}

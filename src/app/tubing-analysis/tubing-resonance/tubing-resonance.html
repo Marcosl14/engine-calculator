@@ -1,59 +1,126 @@
 <h1>Análisis de Resonancia de Conductos</h1>
 
-<div class="container">
-  <div class="motor-inputs">
-    <h3>Parámetros del Motor</h3>
-    <div class="input-group">
-      <label for="rpm">Revoluciones del motor (RPM):</label>
-      <input type="number" id="rpm" class="input-field" [(ngModel)]="rpm" />
+<div class="container flex-column">
+  <div>
+    <div class="motor-inputs">
+      <h3>Parámetros del Motor</h3>
+
+      <div class="container grid col-2">
+        <div class="input-group">
+          <label for="rpm">Revoluciones del motor (RPM):</label>
+          <input type="number" id="rpm" class="input-field" [(ngModel)]="rpm" />
+        </div>
+        <div class="input-group">
+          <label for="rpm">Diámetro del Pistón (mm):</label>
+          <input type="number" id="rpm" class="input-field" [(ngModel)]="pistonDiameter" />
+        </div>
+        <div class="input-group">
+          <label for="rpm">Carrera del Motor (mm):</label>
+          <input type="number" id="rpm" class="input-field" [(ngModel)]="stroke" />
+        </div>
+        <div class="input-group">
+          <label for="rpm">Eficiencia Volumétrica:</label>
+          <input type="number" id="rpm" class="input-field" [(ngModel)]="volumetricEfficiency" />
+        </div>
+      </div>
     </div>
-    <div class="input-group">
-      <label for="intakeAdvance">Avance Apertura Admisión (AAA °):</label>
-      <input type="number" id="intakeAdvance" class="input-field" [(ngModel)]="intakeAdvance" />
+  </div>
+
+  <div class="container flex-row">
+    <div class="motor-inputs">
+      <h3>Admisión</h3>
+      <div class="input-group">
+        <label for="intakeAdvance">Avance Apertura Admisión (AAA°):</label>
+        <input type="number" id="intakeAdvance" class="input-field" [(ngModel)]="intakeAdvance" />
+      </div>
+      <div class="input-group">
+        <label for="intakeDelay">Retraso Cierre Admisión (RCA°):</label>
+        <input type="number" id="intakeDelay" class="input-field" [(ngModel)]="intakeDelay" />
+      </div>
+      <div class="input-group">
+        <label for="intakeHarmonic">Armónico de Admisión:</label>
+        <select id="intakeHarmonic" class="input-field" [(ngModel)]="intakeHarmonic">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="intakeTemperature">Temperatura de Admisión (°C):</label>
+        <input
+          type="number"
+          id="intakeTemperature"
+          class="input-field"
+          [(ngModel)]="intakeTemperature"
+        />
+      </div>
+      <div class="input-group">
+        <label for="intakeValveAmount">Numero de Válvulas de Admsión:</label>
+        <input
+          type="number"
+          id="intakeValveAmount"
+          class="input-field"
+          [(ngModel)]="intakeValveAmount"
+        />
+      </div>
+      <div class="input-group">
+        <label for="intakeAverageSpeed">Velocidad media del aire de Admisión (m/s):</label>
+        <input
+          type="number"
+          id="intakeAverageSpeed"
+          class="input-field"
+          [(ngModel)]="intakeAverageSpeed"
+        />
+      </div>
     </div>
-    <div class="input-group">
-      <label for="intakeDelay">Retraso Cierre Admisión (RCA °):</label>
-      <input type="number" id="intakeDelay" class="input-field" [(ngModel)]="intakeDelay" />
-    </div>
-    <div class="input-group">
-      <label for="exhaustAdvance">Avance Apertura Escape (AAE °):</label>
-      <input type="number" id="exhaustAdvance" class="input-field" [(ngModel)]="exhaustAdvance" />
-    </div>
-    <div class="input-group">
-      <label for="intakeHarmonic">Armónico de Admisión:</label>
-      <select id="intakeHarmonic" class="input-field" [(ngModel)]="intakeHarmonic">
-        <option value="1">1</option>
-        <option value="3">3</option>
-        <option value="5">5</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <label for="exhaustHarmonic">Armónico de Escape:</label>
-      <select id="exhaustHarmonic" class="input-field" [(ngModel)]="exhaustHarmonic">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <label for="intakeTemperature">Temperatura de Admisión (°C):</label>
-      <input
-        type="number"
-        id="intakeTemperature"
-        class="input-field"
-        [(ngModel)]="intakeTemperature"
-      />
-    </div>
-    <div class="input-group">
-      <label for="exhaustTemperature">Temperatura de Escape (°C):</label>
-      <input
-        type="number"
-        id="exhaustTemperature"
-        class="input-field"
-        [(ngModel)]="exhaustTemperature"
-      />
+
+    <div class="motor-inputs">
+      <h3>Escape</h3>
+      <div class="input-group">
+        <label for="intakeAdvance">Avance Apertura Admisión (AAA°):</label>
+        <input type="number" id="intakeAdvance" class="input-field" [(ngModel)]="intakeAdvance" />
+      </div>
+      <div class="input-group">
+        <label for="exhaustAdvance">Avance Apertura Escape (AAE°):</label>
+        <input type="number" id="exhaustAdvance" class="input-field" [(ngModel)]="exhaustAdvance" />
+      </div>
+      <div class="input-group">
+        <label for="exhaustHarmonic">Armónico de Escape:</label>
+        <select id="exhaustHarmonic" class="input-field" [(ngModel)]="exhaustHarmonic">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="exhaustTemperature">Temperatura de Escape (°C):</label>
+        <input
+          type="number"
+          id="exhaustTemperature"
+          class="input-field"
+          [(ngModel)]="exhaustTemperature"
+        />
+      </div>
+      <div class="input-group">
+        <label for="exhaustValveAmount">Numero de Válvulas de Escape:</label>
+        <input
+          type="number"
+          id="exhaustValveAmount"
+          class="input-field"
+          [(ngModel)]="exhaustValveAmount"
+        />
+      </div>
+      <div class="input-group">
+        <label for="exhaustAverageSpeed">Velocidad media de los gases de Escape (m/s):</label>
+        <input
+          type="number"
+          id="exhaustAverageSpeed"
+          class="input-field"
+          [(ngModel)]="exhaustAverageSpeed"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -62,15 +129,19 @@
 
 <div class="results-container" *ngIf="intakeLength !== null || exhaustLength !== null">
   <div class="result-wrapper">
-    <h3>Largo de Admisión (cm)</h3>
-    <p>{{ intakeLength | number : '1.2-2' }} cm</p>
     <h3>Velocidad Sonido Admisión (m/s)</h3>
     <p>{{ intakeSoundSpeed | number : '1.2-2' }} m/s</p>
+    <h3>Largo de Admisión (cm)</h3>
+    <p>{{ intakeLength | number : '1.2-2' }} cm</p>
+    <h3>Diámetro del Tubo de Admisión (mm)</h3>
+    <p>{{ intakeDiameter | number : '1.2-2' }} mm</p>
   </div>
   <div class="result-wrapper">
-    <h3>Largo de Escape (cm)</h3>
-    <p>{{ exhaustLength | number : '1.2-2' }} cm</p>
     <h3>Velocidad Sonido Escape (m/s)</h3>
     <p>{{ exhaustSoundSpeed | number : '1.2-2' }} m/s</p>
+    <h3>Largo de Escape (cm)</h3>
+    <p>{{ exhaustLength | number : '1.2-2' }} cm</p>
+    <h3>Diámetro del Tubo de Escape (mm)</h3>
+    <p>{{ exhaustDiameter | number : '1.2-2' }} mm</p>
   </div>
 </div>

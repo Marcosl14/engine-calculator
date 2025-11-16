@@ -83,6 +83,8 @@
           cilinderDiameterVsStrokeRelation1Type?.toUpperCase()
       }}
     </p>
+    <h3>Relación de Compresión</h3>
+    <p *ngIf="compressionRatio1">{{ compressionRatio1 | number : '1.2-2' }} : 1</p>
   </div>
   <div class="result-wrapper">
     <h3>Volumen Motor 2 (cm³)</h3>
@@ -95,6 +97,8 @@
           cilinderDiameterVsStrokeRelation2Type?.toUpperCase()
       }}
     </p>
+    <h3>Relación de Compresión</h3>
+    <p *ngIf="compressionRatio2">{{ compressionRatio2 | number : '1.2-2' }} : 1</p>
   </div>
 </div>
 

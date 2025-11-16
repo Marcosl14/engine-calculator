@@ -28,6 +28,9 @@ export class PistonKinematics implements OnInit {
   public cilinderDiameterVsStrokeRelation1: number | null = null;
   public cilinderDiameterVsStrokeRelation2: number | null = null;
 
+  public compressionRatio1: number | null = null;
+  public compressionRatio2: number | null = null;
+
   public cilinderDiameterVsStrokeRelation1Type: CilinderDiameterVsStrokeRelationType | null = null;
   public cilinderDiameterVsStrokeRelation2Type: CilinderDiameterVsStrokeRelationType | null = null;
 
@@ -53,7 +56,7 @@ export class PistonKinematics implements OnInit {
     stroke: 57.8,
     connectingRodLength: 96,
     pistonOffset: 0,
-    combustionChamberVolume: 20,
+    combustionChamberVolume: 13,
     engineRPM: 11000,
   };
 
@@ -62,7 +65,7 @@ export class PistonKinematics implements OnInit {
     stroke: 44.82,
     connectingRodLength: 96,
     pistonOffset: 0,
-    combustionChamberVolume: 20,
+    combustionChamberVolume: 13,
     engineRPM: 11000,
   };
 
@@ -145,9 +148,9 @@ export class PistonKinematics implements OnInit {
     const data2 = motion2.calculate(this.engine2);
 
     this.engine1Volume =
-      (Math.PI * (this.engine1.pistonDiameter / (2 * 10)) ** 2 * this.engine1.stroke) / 10;
+      (Math.PI * (this.engine1.pistonDiameter / 2) ** 2 * this.engine1.stroke) / 1000;
     this.engine2Volume =
-      (Math.PI * (this.engine2.pistonDiameter / (2 * 10)) ** 2 * this.engine2.stroke) / 10;
+      (Math.PI * (this.engine2.pistonDiameter / 2) ** 2 * this.engine2.stroke) / 1000;
 
     this.cilinderDiameterVsStrokeRelation1 =
       Math.round((this.engine1.pistonDiameter * 100) / this.engine1.stroke) / 100;
@@ -160,6 +163,17 @@ export class PistonKinematics implements OnInit {
     this.cilinderDiameterVsStrokeRelation2Type = this.getCilinderDiameterVsStrokeRelationType(
       this.cilinderDiameterVsStrokeRelation2
     );
+
+    if (this.engine1Volume) {
+      this.compressionRatio1 =
+        (this.engine1Volume + this.engine1.combustionChamberVolume) /
+        this.engine1.combustionChamberVolume;
+    }
+    if (this.engine2Volume) {
+      this.compressionRatio2 =
+        (this.engine2Volume + this.engine2.combustionChamberVolume) /
+        this.engine2.combustionChamberVolume;
+    }
 
     this.updateChartData(
       this.positionChart,

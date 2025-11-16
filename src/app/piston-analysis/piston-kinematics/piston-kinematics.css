@@ -1,6 +1,5 @@
 .motor-inputs {
   flex: 1;
-  min-width: 300px;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -55,13 +54,6 @@ input {
 canvas {
   width: 100% !important;
   height: 300px !important;
-}
-
-.results-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
 }
 
 .result-wrapper {

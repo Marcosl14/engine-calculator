@@ -1,6 +1,5 @@
 .motor-inputs {
   flex: 1;
-  min-width: 300px;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -31,16 +30,6 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-}
-
-button {
-  margin-bottom: 20px;
-}
-
-.results-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
 }
 
 .result-wrapper {

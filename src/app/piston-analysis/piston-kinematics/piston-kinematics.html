@@ -1,6 +1,6 @@
 <h1>Análisis de Movimiento del Pistón</h1>
 
-<div class="container flex-row">
+<div class="container grid grid-col-2 margin-botton-10">
   <div class="motor-inputs">
     <h3>Motor 1</h3>
     <div class="input-group">
@@ -68,7 +68,10 @@
 
 <button id="calculateAndGraph" (click)="calculateAndGraph()">Calcular y Graficar</button>
 
-<div class="results-container" *ngIf="engine1Volume !== null && engine2Volume !== null">
+<div
+  class="container grid grid-col-2 margin-botton-10"
+  *ngIf="engine1Volume !== null && engine2Volume !== null"
+>
   <div class="result-wrapper">
     <h3>Volumen Motor 1 (cm³)</h3>
     <p>{{ engine1Volume | number : '1.2-2' }} cm³</p>
@@ -95,7 +98,7 @@
   </div>
 </div>
 
-<div class="charts-container">
+<div class="container grid grid-col-2 margin-botton-10">
   <div class="chart-wrapper">
     <canvas id="positionChart"></canvas>
   </div>

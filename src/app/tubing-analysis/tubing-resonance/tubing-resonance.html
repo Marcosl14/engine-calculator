@@ -1,11 +1,11 @@
 <h1>Análisis de Resonancia de Conductos</h1>
 
-<div class="container flex-column">
+<div class="container flex-column margin-botton-10">
   <div>
     <div class="motor-inputs">
       <h3>Parámetros del Motor</h3>
 
-      <div class="container grid col-2">
+      <div class="container grid grid-col-2">
         <div class="input-group">
           <label for="rpm">Revoluciones del motor (RPM):</label>
           <input type="number" id="rpm" class="input-field" [(ngModel)]="rpm" />
@@ -127,7 +127,10 @@
 
 <button id="calculate" (click)="calculate()">Calcular</button>
 
-<div class="results-container" *ngIf="intakeLength !== null || exhaustLength !== null">
+<div
+  class="container grid grid-col-2 margin-botton-10"
+  *ngIf="intakeLength !== null || exhaustLength !== null"
+>
   <div class="result-wrapper">
     <h3>Velocidad Sonido Admisión (m/s)</h3>
     <p>{{ intakeSoundSpeed | number : '1.2-2' }} m/s</p>

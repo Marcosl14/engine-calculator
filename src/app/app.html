@@ -1,23 +1,5 @@
-<style>
-  .active-tab {
-    background-color: #4c53af;
-    color: white;
-  }
-
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
-</style>
-
 <main class="main">
-  <nav>
+  <nav class="container navigation">
     <button
       (click)="goToPistonKinematics()"
       [class.active-tab]="activeTab === routes.pistonKinematics"

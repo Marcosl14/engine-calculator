@@ -187,9 +187,9 @@ export class PistonKinematics implements OnInit {
     cilinderDiameterVsStrokeRelation: number
   ): CilinderDiameterVsStrokeRelationType {
     switch (true) {
-      case cilinderDiameterVsStrokeRelation > 1.25:
+      case cilinderDiameterVsStrokeRelation > 1.05:
         return CilinderDiameterVsStrokeRelationType.OVER_SQUARED;
-      case cilinderDiameterVsStrokeRelation < 0.75:
+      case cilinderDiameterVsStrokeRelation < 0.95:
         return CilinderDiameterVsStrokeRelationType.UNDER_SQUARED;
       default:
         return CilinderDiameterVsStrokeRelationType.SQUARED;

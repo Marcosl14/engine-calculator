@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Chart } from 'chart.js/auto';
 import { EngineInformation, PistonMotion } from '../../methods/PistonMotion';
 import { CommonModule } from '@angular/common';
+import { min } from 'rxjs';
 
 enum CilinderDiameterVsStrokeRelationType {
   SQUARED = 'cuadrado',
@@ -41,8 +42,11 @@ export class PistonKinematics implements OnInit {
   public cilinderDiameterVsStrokeRelation1: number | null = null;
   public cilinderDiameterVsStrokeRelation2: number | null = null;
 
-  public compressionRatio1: number | null = null;
-  public compressionRatio2: number | null = null;
+  public staticCompressionRatio1: number | null = null;
+  public staticCompressionRatio2: number | null = null;
+
+  public dynamicCompressionRatio1: number | null = null;
+  public dynamicCompressionRatio2: number | null = null;
 
   public cilinderDiameterVsStrokeRelation1Type: CilinderDiameterVsStrokeRelationType | null = null;
   public cilinderDiameterVsStrokeRelation2Type: CilinderDiameterVsStrokeRelationType | null = null;
@@ -60,6 +64,8 @@ export class PistonKinematics implements OnInit {
         title: { display: true, text: 'Ángulo de giro (grados)' },
         type: 'linear' as const,
         position: 'bottom' as const,
+        min: 0,
+        max: 360,
       },
     },
     plugins: {
@@ -76,6 +82,7 @@ export class PistonKinematics implements OnInit {
     pistonOffset: 0,
     combustionChamberVolume: 13,
     engineRPM: 11000,
+    intakeValveClosing: 70,
   };
 
   engine2: EngineInformation = {
@@ -85,6 +92,7 @@ export class PistonKinematics implements OnInit {
     pistonOffset: 0,
     combustionChamberVolume: 13,
     engineRPM: 11000,
+    intakeValveClosing: 68,
   };
 
   ngOnInit(): void {
@@ -165,45 +173,11 @@ export class PistonKinematics implements OnInit {
     const data1 = motion1.calculate(this.engine1);
     const data2 = motion2.calculate(this.engine2);
 
-    this.engine1Volume =
-      (Math.PI * (this.engine1.pistonDiameter / 2) ** 2 * this.engine1.stroke) / 1000;
-    this.engine2Volume =
-      (Math.PI * (this.engine2.pistonDiameter / 2) ** 2 * this.engine2.stroke) / 1000;
+    this.getCilinderDiameterVsStrokeRelation();
 
-    this.cilinderDiameterVsStrokeRelation1 =
-      Math.round((this.engine1.pistonDiameter * 100) / this.engine1.stroke) / 100;
-    this.cilinderDiameterVsStrokeRelation2 =
-      Math.round((this.engine2.pistonDiameter * 100) / this.engine2.stroke) / 100;
+    this.getCompressionRatio(data1.volumes, data2.volumes);
 
-    this.cilinderDiameterVsStrokeRelation1Type = this.getCilinderDiameterVsStrokeRelationType(
-      this.cilinderDiameterVsStrokeRelation1
-    );
-    this.cilinderDiameterVsStrokeRelation2Type = this.getCilinderDiameterVsStrokeRelationType(
-      this.cilinderDiameterVsStrokeRelation2
-    );
-
-    if (this.engine1Volume) {
-      this.compressionRatio1 =
-        (this.engine1Volume + this.engine1.combustionChamberVolume) /
-        this.engine1.combustionChamberVolume;
-    }
-    if (this.engine2Volume) {
-      this.compressionRatio2 =
-        (this.engine2Volume + this.engine2.combustionChamberVolume) /
-        this.engine2.combustionChamberVolume;
-    }
-
-    this.rodStrokeRatio1 =
-      Math.round((this.engine1.connectingRodLength / this.engine1.stroke) * 100) / 100;
-    this.rodStrokeRatio2 =
-      Math.round((this.engine2.connectingRodLength / this.engine2.stroke) * 100) / 100;
-
-    this.rodStrokeRatioCharacteristics1 = this.getRodStrokeRatioCharacteristics(
-      this.rodStrokeRatio1
-    );
-    this.rodStrokeRatioCharacteristics2 = this.getRodStrokeRatioCharacteristics(
-      this.rodStrokeRatio2
-    );
+    this.getRodStrokeRation();
 
     this.updateChartData(
       this.positionChart,
@@ -224,6 +198,65 @@ export class PistonKinematics implements OnInit {
       this.volumeChart,
       this.generatePointSets(data1.volumes),
       this.generatePointSets(data2.volumes)
+    );
+  }
+
+  private getCompressionRatio(engine1Volumes: number[], engine2Volumes: number[]) {
+    this.engine1Volume =
+      (Math.PI * (this.engine1.pistonDiameter / 2) ** 2 * this.engine1.stroke) / 1000;
+    this.engine2Volume =
+      (Math.PI * (this.engine2.pistonDiameter / 2) ** 2 * this.engine2.stroke) / 1000;
+
+    if (this.engine1Volume) {
+      this.staticCompressionRatio1 =
+        (this.engine1Volume + this.engine1.combustionChamberVolume) /
+        this.engine1.combustionChamberVolume;
+    }
+    if (this.engine2Volume) {
+      this.staticCompressionRatio2 =
+        (this.engine2Volume + this.engine2.combustionChamberVolume) /
+        this.engine2.combustionChamberVolume;
+    }
+
+    const engine1DynamicVolume =
+      this.engine1Volume - engine1Volumes[this.engine1.intakeValveClosing];
+    const engine2DynamicVolume =
+      this.engine2Volume - engine2Volumes[this.engine2.intakeValveClosing];
+
+    this.dynamicCompressionRatio1 =
+      (engine1DynamicVolume + this.engine1.combustionChamberVolume) /
+      this.engine1.combustionChamberVolume;
+
+    this.dynamicCompressionRatio2 =
+      (engine2DynamicVolume + this.engine2.combustionChamberVolume) /
+      this.engine2.combustionChamberVolume;
+  }
+
+  private getRodStrokeRation() {
+    this.rodStrokeRatio1 =
+      Math.round((this.engine1.connectingRodLength / this.engine1.stroke) * 100) / 100;
+    this.rodStrokeRatio2 =
+      Math.round((this.engine2.connectingRodLength / this.engine2.stroke) * 100) / 100;
+
+    this.rodStrokeRatioCharacteristics1 = this.getRodStrokeRatioCharacteristics(
+      this.rodStrokeRatio1
+    );
+    this.rodStrokeRatioCharacteristics2 = this.getRodStrokeRatioCharacteristics(
+      this.rodStrokeRatio2
+    );
+  }
+
+  private getCilinderDiameterVsStrokeRelation() {
+    this.cilinderDiameterVsStrokeRelation1 =
+      Math.round((this.engine1.pistonDiameter * 100) / this.engine1.stroke) / 100;
+    this.cilinderDiameterVsStrokeRelation2 =
+      Math.round((this.engine2.pistonDiameter * 100) / this.engine2.stroke) / 100;
+
+    this.cilinderDiameterVsStrokeRelation1Type = this.getCilinderDiameterVsStrokeRelationType(
+      this.cilinderDiameterVsStrokeRelation1
+    );
+    this.cilinderDiameterVsStrokeRelation2Type = this.getCilinderDiameterVsStrokeRelationType(
+      this.cilinderDiameterVsStrokeRelation2
     );
   }
 

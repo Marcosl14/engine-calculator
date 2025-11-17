@@ -17,14 +17,14 @@ export class TubingResonance implements OnInit {
   pistonDiameter: number = 59;
   volumetricEfficiency: number = 0.95;
 
-  intakeAdvance: number = 35;
-  intakeDelay: number = 60;
+  intakeValveOpenning: number = 40;
+  intakeValveClosing: number = 70;
   intakeHarmonic: number = 3;
   intakeTemperature: number = 50;
   intakeValveAmount: number = 1;
   intakeAverageSpeed: number = 90;
 
-  exhaustAdvance: number = 70;
+  exhaustValveOpenning: number = 70;
   exhaustHarmonic: number = 2;
   exhaustTemperature: number = 900;
   exhaustValveAmount: number = 1;
@@ -45,8 +45,8 @@ export class TubingResonance implements OnInit {
     const resonanceCalculator = new TubingResonanceCalculator();
     const intakeResult = resonanceCalculator.calculateIntakeLength(
       this.rpm,
-      this.intakeAdvance,
-      this.intakeDelay,
+      this.intakeValveOpenning,
+      this.intakeValveClosing,
       this.intakeHarmonic,
       this.intakeTemperature
     );
@@ -55,8 +55,8 @@ export class TubingResonance implements OnInit {
 
     const exhaustResult = resonanceCalculator.calculateExhaustLength(
       this.rpm,
-      this.exhaustAdvance,
-      this.intakeAdvance,
+      this.exhaustValveOpenning,
+      this.intakeValveOpenning,
       this.exhaustHarmonic,
       this.exhaustTemperature
     );

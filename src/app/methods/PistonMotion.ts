@@ -6,25 +6,18 @@ export class PistonMotion {
       this.calculatePistonPosition(angle, parameters)
     );
 
-    const pmiAngle =
-      angles[absolutePositions.indexOf(Math.min(...absolutePositions))];
+    const pmiAngle = angles[absolutePositions.indexOf(Math.min(...absolutePositions))];
     const positionAtPMI = this.calculatePistonPosition(pmiAngle, parameters);
 
-    const positions = absolutePositions.map(
-      (position) => position - positionAtPMI
-    );
+    const positions = absolutePositions.map((position) => position - positionAtPMI);
 
-    const velocities = angles.map((angle) =>
-      this.calculatePistonVelocity(angle, parameters)
-    );
+    const velocities = angles.map((angle) => this.calculatePistonVelocity(angle, parameters));
 
     const accelerations = angles.map((angle) =>
       this.calculatePistonAcceleration(angle, parameters)
     );
 
-    const volumes = angles.map((angle) =>
-      this.calculateVolume(angle, parameters, positionAtPMI)
-    );
+    const volumes = angles.map((angle) => this.calculateVolume(angle, parameters, positionAtPMI));
     const minVolume = Math.min(...volumes);
 
     return {
@@ -32,19 +25,14 @@ export class PistonMotion {
       positions,
       velocities,
       accelerations,
-      volumes: volumes.map(
-        (volume) => volume - minVolume + parameters.combustionChamberVolume
-      ),
+      volumes: volumes.map((volume) => volume - minVolume + parameters.combustionChamberVolume),
     };
   }
 
-  private calculatePistonPosition(
-    angle: number,
-    parameters: EngineInformation
-  ): number {
+  private calculatePistonPosition(angle: number, parameters: EngineInformation): number {
     const { stroke, connectingRodLength, pistonOffset } = parameters;
     const crankRadius = stroke / 2;
-    const angleRad = (angle * Math.PI) / 180;
+    const angleRad = ((angle - 180) * Math.PI) / 180;
 
     const term1 = crankRadius * Math.cos(angleRad);
     const term2 = Math.sqrt(
@@ -55,73 +43,50 @@ export class PistonMotion {
     return term1 + term2;
   }
 
-  private calculatePistonVelocity(
-    angle: number,
-    parameters: EngineInformation
-  ): number {
+  private calculatePistonVelocity(angle: number, parameters: EngineInformation): number {
     const { engineRPM } = parameters;
 
     const angularVelocity = (engineRPM * 2 * Math.PI) / 60;
 
-    const positionDerivative = this.calculatePositionDerivative(
-      angle,
-      parameters
-    );
+    const positionDerivative = this.calculatePositionDerivative(angle, parameters);
     return (positionDerivative * angularVelocity) / 1000;
   }
 
-  private calculatePistonAcceleration(
-    angle: number,
-    parameters: EngineInformation
-  ): number {
+  private calculatePistonAcceleration(angle: number, parameters: EngineInformation): number {
     const { engineRPM } = parameters;
 
     const angularVelocity = (engineRPM * 2 * Math.PI) / 60;
 
-    const positionSecondDerivative = this.calculatePositionSecondDerivative(
-      angle,
-      parameters
-    );
+    const positionSecondDerivative = this.calculatePositionSecondDerivative(angle, parameters);
     return (positionSecondDerivative * Math.pow(angularVelocity, 2)) / 1000;
   }
 
-  private calculatePositionDerivative(
-    angle: number,
-    parameters: EngineInformation
-  ): number {
+  private calculatePositionDerivative(angle: number, parameters: EngineInformation): number {
     const { stroke, connectingRodLength, pistonOffset } = parameters;
     const crankRadius = stroke / 2;
-    const angleRad = (angle * Math.PI) / 180;
+    const angleRad = ((angle - 180) * Math.PI) / 180;
 
     const sinTheta = Math.sin(angleRad);
     const cosTheta = Math.cos(angleRad);
 
     const term = crankRadius * sinTheta - pistonOffset;
-    const sqrtTerm = Math.sqrt(
-      connectingRodLength * connectingRodLength - term * term
-    );
+    const sqrtTerm = Math.sqrt(connectingRodLength * connectingRodLength - term * term);
 
-    const derivative =
-      -crankRadius * sinTheta + (crankRadius * cosTheta * term) / sqrtTerm;
+    const derivative = -crankRadius * sinTheta + (crankRadius * cosTheta * term) / sqrtTerm;
 
     return derivative;
   }
 
-  private calculatePositionSecondDerivative(
-    angle: number,
-    parameters: EngineInformation
-  ): number {
+  private calculatePositionSecondDerivative(angle: number, parameters: EngineInformation): number {
     const { stroke, connectingRodLength, pistonOffset } = parameters;
     const crankRadius = stroke / 2;
-    const angleRad = (angle * Math.PI) / 180;
+    const angleRad = ((angle - 180) * Math.PI) / 180;
 
     const sinTheta = Math.sin(angleRad);
     const cosTheta = Math.cos(angleRad);
 
     const term = crankRadius * sinTheta - pistonOffset;
-    const sqrtTerm = Math.sqrt(
-      connectingRodLength * connectingRodLength - term * term
-    );
+    const sqrtTerm = Math.sqrt(connectingRodLength * connectingRodLength - term * term);
     const sqrtTerm3 = Math.pow(sqrtTerm, 3);
 
     const secondDerivative =
@@ -158,6 +123,7 @@ export interface EngineInformation {
   pistonOffset: number;
   combustionChamberVolume: number;
   engineRPM: number;
+  intakeValveClosing: number;
 }
 
 export interface EngineMotionData {

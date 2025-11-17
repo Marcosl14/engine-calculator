@@ -30,12 +30,22 @@
     <div class="motor-inputs">
       <h3>Admisión</h3>
       <div class="input-group">
-        <label for="intakeAdvance">Avance Apertura Admisión (AAA°):</label>
-        <input type="number" id="intakeAdvance" class="input-field" [(ngModel)]="intakeAdvance" />
+        <label for="intakeValveOpenning">Avance Apertura Admisión (AAA°):</label>
+        <input
+          type="number"
+          id="intakeValveOpenning"
+          class="input-field"
+          [(ngModel)]="intakeValveOpenning"
+        />
       </div>
       <div class="input-group">
-        <label for="intakeDelay">Retraso Cierre Admisión (RCA°):</label>
-        <input type="number" id="intakeDelay" class="input-field" [(ngModel)]="intakeDelay" />
+        <label for="intakeValveClosing">Retraso Cierre Admisión (RCA°):</label>
+        <input
+          type="number"
+          id="intakeValveClosing"
+          class="input-field"
+          [(ngModel)]="intakeValveClosing"
+        />
       </div>
       <div class="input-group">
         <label for="intakeHarmonic">Armónico de Admisión:</label>
@@ -77,12 +87,22 @@
     <div class="motor-inputs">
       <h3>Escape</h3>
       <div class="input-group">
-        <label for="intakeAdvance">Avance Apertura Admisión (AAA°):</label>
-        <input type="number" id="intakeAdvance" class="input-field" [(ngModel)]="intakeAdvance" />
+        <label for="intakeValveOpenning">Avance Apertura Admisión (AAA°):</label>
+        <input
+          type="number"
+          id="intakeValveOpenning"
+          class="input-field"
+          [(ngModel)]="intakeValveOpenning"
+        />
       </div>
       <div class="input-group">
-        <label for="exhaustAdvance">Avance Apertura Escape (AAE°):</label>
-        <input type="number" id="exhaustAdvance" class="input-field" [(ngModel)]="exhaustAdvance" />
+        <label for="exhaustValveOpenning">Avance Apertura Escape (AAE°):</label>
+        <input
+          type="number"
+          id="exhaustValveOpenning"
+          class="input-field"
+          [(ngModel)]="exhaustValveOpenning"
+        />
       </div>
       <div class="input-group">
         <label for="exhaustHarmonic">Armónico de Escape:</label>

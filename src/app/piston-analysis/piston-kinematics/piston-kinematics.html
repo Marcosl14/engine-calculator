@@ -31,6 +31,15 @@
       <label for="engineRPM1">Revoluciones del motor (1/min o RPM):</label>
       <input type="number" id="engineRPM1" [(ngModel)]="engine1.engineRPM" />
     </div>
+    <div class="input-group">
+      <label for="intakeValveClosing">Retraso Cierre Admisión (RCA°):</label>
+      <input
+        type="number"
+        id="intakeValveClosing"
+        class="input-field"
+        [(ngModel)]="engine1.intakeValveClosing"
+      />
+    </div>
   </div>
 
   <div class="motor-inputs">
@@ -63,6 +72,15 @@
       <label for="engineRPM2">Revoluciones del motor (1/min o RPM):</label>
       <input type="number" id="engineRPM2" [(ngModel)]="engine2.engineRPM" />
     </div>
+    <div class="input-group">
+      <label for="intakeValveClosing">Retraso Cierre Admisión (RCA°):</label>
+      <input
+        type="number"
+        id="intakeValveClosing"
+        class="input-field"
+        [(ngModel)]="engine2.intakeValveClosing"
+      />
+    </div>
   </div>
 </div>
 
@@ -75,6 +93,11 @@
   <div class="result-wrapper">
     <h3>Volumen Motor 1 (cm³)</h3>
     <p>{{ engine1Volume | number : '1.2-2' }} cm³</p>
+
+    <h3>Factor de Compresión Estática</h3>
+    <p *ngIf="staticCompressionRatio1">{{ staticCompressionRatio1 | number : '1.2-2' }} : 1</p>
+    <h3>Factor de Compresión Dinámica</h3>
+    <p *ngIf="dynamicCompressionRatio1">{{ dynamicCompressionRatio1 | number : '1.2-2' }} : 1</p>
     <h3>Diametro del Cilindro vs Carrera</h3>
     <p>
       {{
@@ -83,9 +106,7 @@
           cilinderDiameterVsStrokeRelation1Type?.toUpperCase()
       }}
     </p>
-    <h3>Relación de Compresión</h3>
-    <p *ngIf="compressionRatio1">{{ compressionRatio1 | number : '1.2-2' }} : 1</p>
-    <h3>Relación Biela/Carrera</h3>
+    <h3>Largo Biela vs Carrera</h3>
     <p *ngIf="rodStrokeRatio1">
       {{ rodStrokeRatio1 | number : '1.2-2' }} =
       {{ rodStrokeRatioCharacteristics1?.type?.toUpperCase() }}
@@ -97,6 +118,11 @@
   <div class="result-wrapper">
     <h3>Volumen Motor 2 (cm³)</h3>
     <p>{{ engine2Volume | number : '1.2-2' }} cm³</p>
+
+    <h3>Factor de Compresión Estática</h3>
+    <p *ngIf="staticCompressionRatio2">{{ staticCompressionRatio2 | number : '1.2-2' }} : 1</p>
+    <h3>Factor de Compresión Dinámica</h3>
+    <p *ngIf="dynamicCompressionRatio2">{{ dynamicCompressionRatio2 | number : '1.2-2' }} : 1</p>
     <h3>Diametro del Cilindro vs Carrera</h3>
     <p>
       {{
@@ -105,9 +131,7 @@
           cilinderDiameterVsStrokeRelation2Type?.toUpperCase()
       }}
     </p>
-    <h3>Relación de Compresión</h3>
-    <p *ngIf="compressionRatio2">{{ compressionRatio2 | number : '1.2-2' }} : 1</p>
-    <h3>Relación Biela/Carrera</h3>
+    <h3>Largo Biela vs Carrera</h3>
     <p *ngIf="rodStrokeRatio2">
       {{ rodStrokeRatio2 | number : '1.2-2' }} =
       {{ rodStrokeRatioCharacteristics2?.type?.toUpperCase() }}

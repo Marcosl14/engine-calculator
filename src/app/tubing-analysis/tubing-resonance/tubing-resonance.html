@@ -8,19 +8,29 @@
       <div class="container grid grid-col-2">
         <div class="input-group">
           <label for="rpm">Revoluciones del motor (RPM):</label>
-          <input type="number" id="rpm" class="input-field" [(ngModel)]="rpm" />
+          <input type="number" id="tubing-rpm" class="input-field" [(ngModel)]="rpm" />
         </div>
         <div class="input-group">
-          <label for="rpm">Diámetro del Pistón (mm):</label>
-          <input type="number" id="rpm" class="input-field" [(ngModel)]="pistonDiameter" />
+          <label for="tubing-pistonDiameter">Diámetro del Pistón (mm):</label>
+          <input
+            type="number"
+            id="tubing-pistonDiameter"
+            class="input-field"
+            [(ngModel)]="pistonDiameter"
+          />
         </div>
         <div class="input-group">
-          <label for="rpm">Carrera del Motor (mm):</label>
-          <input type="number" id="rpm" class="input-field" [(ngModel)]="stroke" />
+          <label for="tubing-stroke">Carrera del Motor (mm):</label>
+          <input type="number" id="tubing-stroke" class="input-field" [(ngModel)]="stroke" />
         </div>
         <div class="input-group">
-          <label for="rpm">Eficiencia Volumétrica:</label>
-          <input type="number" id="rpm" class="input-field" [(ngModel)]="volumetricEfficiency" />
+          <label for="volumetricEfficiency">Eficiencia Volumétrica:</label>
+          <input
+            type="number"
+            id="volumetricEfficiency"
+            class="input-field"
+            [(ngModel)]="volumetricEfficiency"
+          />
         </div>
       </div>
     </div>
@@ -30,10 +40,10 @@
     <div class="motor-inputs">
       <h3>Admisión</h3>
       <div class="input-group">
-        <label for="intakeValveOpenning">Avance Apertura Admisión (AAA°):</label>
+        <label for="intakeValveOpening">Avance Apertura Admisión (AAA°):</label>
         <input
           type="number"
-          id="intakeValveOpenning"
+          id="intakeValveOpening"
           class="input-field"
           [(ngModel)]="intakeValveOpenning"
         />
@@ -42,7 +52,7 @@
         <label for="intakeValveClosing">Retraso Cierre Admisión (RCA°):</label>
         <input
           type="number"
-          id="intakeValveClosing"
+          id="tubing-intakeValveClosing"
           class="input-field"
           [(ngModel)]="intakeValveClosing"
         />
@@ -65,7 +75,7 @@
         />
       </div>
       <div class="input-group">
-        <label for="intakeValveAmount">Numero de Válvulas de Admsión:</label>
+        <label for="intakeValveAmount">Numero de Válvulas de Admisión:</label>
         <input
           type="number"
           id="intakeValveAmount"
@@ -86,15 +96,6 @@
 
     <div class="motor-inputs">
       <h3>Escape</h3>
-      <div class="input-group">
-        <label for="intakeValveOpenning">Avance Apertura Admisión (AAA°):</label>
-        <input
-          type="number"
-          id="intakeValveOpenning"
-          class="input-field"
-          [(ngModel)]="intakeValveOpenning"
-        />
-      </div>
       <div class="input-group">
         <label for="exhaustValveOpenning">Avance Apertura Escape (AAE°):</label>
         <input
@@ -151,20 +152,38 @@
   class="container grid grid-col-2 margin-botton-10"
   *ngIf="intakeLength !== null || exhaustLength !== null"
 >
-  <div class="result-wrapper">
-    <h3>Velocidad Sonido Admisión (m/s)</h3>
-    <p>{{ intakeSoundSpeed | number : '1.2-2' }} m/s</p>
-    <h3>Largo de Admisión (cm)</h3>
-    <p>{{ intakeLength | number : '1.2-2' }} cm</p>
-    <h3>Diámetro del Tubo de Admisión (mm)</h3>
-    <p>{{ intakeDiameter | number : '1.2-2' }} mm</p>
+  <div>
+    <app-results-card
+      title="Velocidad Sonido Admisión"
+      [value]="intakeSoundSpeed | number : '1.2-2'"
+      unit="m/s"
+    />
+    <app-results-card
+      title="Largo de Admisión"
+      [value]="intakeLength | number : '1.2-2'"
+      unit="cm"
+    />
+    <app-results-card
+      title="Diámetro del Tubo de Admisión"
+      [value]="intakeDiameter | number : '1.2-2'"
+      unit="mm"
+    />
   </div>
-  <div class="result-wrapper">
-    <h3>Velocidad Sonido Escape (m/s)</h3>
-    <p>{{ exhaustSoundSpeed | number : '1.2-2' }} m/s</p>
-    <h3>Largo de Escape (cm)</h3>
-    <p>{{ exhaustLength | number : '1.2-2' }} cm</p>
-    <h3>Diámetro del Tubo de Escape (mm)</h3>
-    <p>{{ exhaustDiameter | number : '1.2-2' }} mm</p>
+  <div>
+    <app-results-card
+      title="Velocidad Sonido Escape"
+      [value]="exhaustSoundSpeed | number : '1.2-2'"
+      unit="m/s"
+    />
+    <app-results-card
+      title="Largo de Escape"
+      [value]="exhaustLength | number : '1.2-2'"
+      unit="cm"
+    />
+    <app-results-card
+      title="Diámetro del Tubo de Escape"
+      [value]="exhaustDiameter | number : '1.2-2'"
+      unit="mm"
+    />
   </div>
 </div>

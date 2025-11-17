@@ -1,0 +1,7 @@
+<div class="results-card" *ngIf="value !== null">
+  <h3>{{ title }}</h3>
+  <p>
+    {{ value }} <span *ngIf="unit">{{ unit }}</span>
+  </p>
+  <label *ngIf="comment" class="result-comment">{{ comment }}</label>
+</div>

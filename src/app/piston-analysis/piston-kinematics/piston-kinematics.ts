@@ -1,9 +1,9 @@
-import { OnInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Chart } from 'chart.js/auto';
 import { EngineInformation, PistonMotion } from '../../methods/PistonMotion';
 import { CommonModule } from '@angular/common';
-import { min } from 'rxjs';
+import { ResultsCard } from '../../common-components/results-card/results-card';
+import Chart from 'chart.js/auto';
 
 enum CilinderDiameterVsStrokeRelationType {
   SQUARED = 'cuadrado',
@@ -26,7 +26,7 @@ interface RodStrokeCharacteristics {
 
 @Component({
   selector: 'app-piston-kinematics',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ResultsCard],
   templateUrl: './piston-kinematics.html',
   styleUrl: './piston-kinematics.css',
 })

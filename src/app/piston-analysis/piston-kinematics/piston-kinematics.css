@@ -55,27 +55,3 @@ canvas {
   width: 100% !important;
   height: 300px !important;
 }
-
-.result-wrapper {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.result-wrapper h3 {
-  margin-top: 0;
-  color: #333;
-}
-
-.result-wrapper p {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #007bff;
-}
-
-.result-comment {
-  font-size: 1rem;
-  color: rgb(165, 0, 0);
-}

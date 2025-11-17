@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TubingResonanceCalculator } from '../../methods/TubingResonanceCalculator';
 import { TubingFlowCalculator } from '../../methods/TubingFlowCalculator';
+import { ResultsCard } from '../../common-components/results-card/results-card';
 
 @Component({
   selector: 'app-tubing-resonance',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ResultsCard],
   templateUrl: './tubing-resonance.html',
   styleUrl: './tubing-resonance.css',
 })

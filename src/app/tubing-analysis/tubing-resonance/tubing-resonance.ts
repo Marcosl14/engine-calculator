@@ -5,11 +5,12 @@ import { TubingResonanceCalculator } from '../../methods/TubingResonanceCalculat
 import { TubingFlowCalculator } from '../../methods/TubingFlowCalculator';
 import { ResultsCard } from '../../common-components/results-card/results-card';
 import { ScatterChart } from '../../common-components/scatter-chart/scatter-chart';
+import { InputCard, SelectOption } from '../../common-components/input-card/input-card';
 
 @Component({
   selector: 'app-tubing-resonance',
   standalone: true,
-  imports: [CommonModule, FormsModule, ResultsCard, ScatterChart],
+  imports: [CommonModule, FormsModule, ResultsCard, ScatterChart, InputCard],
   templateUrl: './tubing-resonance.html',
   styleUrl: './tubing-resonance.css',
 })
@@ -52,6 +53,20 @@ export class TubingResonance implements AfterViewInit {
 
   @ViewChild('intakeFlowChart') intakeFlowChart!: ScatterChart;
   @ViewChild('exhaustFlowChart') exhaustFlowChart!: ScatterChart;
+
+  intakeHarmonicOptions: SelectOption<number>[] = [
+    { value: 1, label: '1' },
+    { value: 3, label: '3' },
+    { value: 5, label: '5' },
+  ];
+
+  exhaustHarmonicOptions: SelectOption<number>[] = [
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
+    { value: 5, label: '5' },
+  ];
 
   ngAfterViewInit(): void {
     this.calculate();

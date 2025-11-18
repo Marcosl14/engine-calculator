@@ -3,84 +3,94 @@
 <div class="container grid grid-col-2 margin-botton-10">
   <div class="motor-inputs">
     <h3>Motor 1</h3>
-    <div class="input-group">
-      <label for="pistonDiameter1">Diámetro del pistón (mm):</label>
-      <input type="number" id="pistonDiameter1" [(ngModel)]="engine1.pistonDiameter" />
-    </div>
-    <div class="input-group">
-      <label for="stroke1">Carrera (mm):</label>
-      <input type="number" id="stroke1" [(ngModel)]="engine1.stroke" />
-    </div>
-    <div class="input-group">
-      <label for="connectingRodLength1">Largo de biela (mm):</label>
-      <input type="number" id="connectingRodLength1" [(ngModel)]="engine1.connectingRodLength" />
-    </div>
-    <div class="input-group">
-      <label for="pistonOffset1">Descentrado del perno (mm):</label>
-      <input type="number" id="pistonOffset1" [(ngModel)]="engine1.pistonOffset" />
-    </div>
-    <div class="input-group">
-      <label for="combustionChamberVolume1">Volumen de cámara (cm³):</label>
-      <input
-        type="number"
-        id="combustionChamberVolume1"
-        [(ngModel)]="engine1.combustionChamberVolume"
-      />
-    </div>
-    <div class="input-group">
-      <label for="engineRPM1">Revoluciones del motor (1/min o RPM):</label>
-      <input type="number" id="engineRPM1" [(ngModel)]="engine1.engineRPM" />
-    </div>
-    <div class="input-group">
-      <label for="intakeValveClosing1">Retraso Cierre Admisión (RCA°):</label>
-      <input
-        type="number"
-        id="intakeValveClosing1"
-        class="input-field"
-        [(ngModel)]="engine1.intakeValveClosing"
-      />
-    </div>
+    <app-input-card
+      label="Diámetro del pistón (mm)"
+      id="pistonDiameter1"
+      type="number"
+      [(value)]="engine1.pistonDiameter"
+    ></app-input-card>
+    <app-input-card
+      label="Carrera (mm)"
+      id="stroke1"
+      type="number"
+      [(value)]="engine1.stroke"
+    ></app-input-card>
+    <app-input-card
+      label="Largo de biela (mm)"
+      id="connectingRodLength1"
+      type="number"
+      [(value)]="engine1.connectingRodLength"
+    ></app-input-card>
+    <app-input-card
+      label="Descentrado del perno (mm)"
+      id="pistonOffset1"
+      type="number"
+      [(value)]="engine1.pistonOffset"
+    ></app-input-card>
+    <app-input-card
+      label="Volumen de cámara (cm³)"
+      id="combustionChamberVolume1"
+      type="number"
+      [(value)]="engine1.combustionChamberVolume"
+    ></app-input-card>
+    <app-input-card
+      label="Revoluciones del motor (1/min o RPM)"
+      id="engineRPM1"
+      type="number"
+      [(value)]="engine1.engineRPM"
+    ></app-input-card>
+    <app-input-card
+      label="Retraso Cierre Admisión (RCA°)"
+      id="intakeValveClosing1"
+      type="number"
+      [(value)]="engine1.intakeValveClosing"
+    ></app-input-card>
   </div>
 
   <div class="motor-inputs">
     <h3>Motor 2</h3>
-    <div class="input-group">
-      <label for="pistonDiameter2">Diámetro del pistón (mm):</label>
-      <input type="number" id="pistonDiameter2" [(ngModel)]="engine2.pistonDiameter" />
-    </div>
-    <div class="input-group">
-      <label for="stroke2">Carrera (mm):</label>
-      <input type="number" id="stroke2" [(ngModel)]="engine2.stroke" />
-    </div>
-    <div class="input-group">
-      <label for="connectingRodLength2">Largo de biela (mm):</label>
-      <input type="number" id="connectingRodLength2" [(ngModel)]="engine2.connectingRodLength" />
-    </div>
-    <div class="input-group">
-      <label for="pistonOffset2">Descentrado del perno (mm):</label>
-      <input type="number" id="pistonOffset2" [(ngModel)]="engine2.pistonOffset" />
-    </div>
-    <div class="input-group">
-      <label for="combustionChamberVolume2">Volumen de cámara (cm³):</label>
-      <input
-        type="number"
-        id="combustionChamberVolume2"
-        [(ngModel)]="engine2.combustionChamberVolume"
-      />
-    </div>
-    <div class="input-group">
-      <label for="engineRPM2">Revoluciones del motor (1/min o RPM):</label>
-      <input type="number" id="engineRPM2" [(ngModel)]="engine2.engineRPM" />
-    </div>
-    <div class="input-group">
-      <label for="intakeValveClosing2">Retraso Cierre Admisión (RCA°):</label>
-      <input
-        type="number"
-        id="intakeValveClosing2"
-        class="input-field"
-        [(ngModel)]="engine2.intakeValveClosing"
-      />
-    </div>
+    <app-input-card
+      label="Diámetro del pistón (mm)"
+      id="pistonDiameter2"
+      type="number"
+      [(value)]="engine2.pistonDiameter"
+    ></app-input-card>
+    <app-input-card
+      label="Carrera (mm)"
+      id="stroke2"
+      type="number"
+      [(value)]="engine2.stroke"
+    ></app-input-card>
+    <app-input-card
+      label="Largo de biela (mm)"
+      id="connectingRodLength2"
+      type="number"
+      [(value)]="engine2.connectingRodLength"
+    ></app-input-card>
+    <app-input-card
+      label="Descentrado del perno (mm)"
+      id="pistonOffset2"
+      type="number"
+      [(value)]="engine2.pistonOffset"
+    ></app-input-card>
+    <app-input-card
+      label="Volumen de cámara (cm³)"
+      id="combustionChamberVolume2"
+      type="number"
+      [(value)]="engine2.combustionChamberVolume"
+    ></app-input-card>
+    <app-input-card
+      label="Revoluciones del motor (1/min o RPM)"
+      id="engineRPM2"
+      type="number"
+      [(value)]="engine2.engineRPM"
+    ></app-input-card>
+    <app-input-card
+      label="Retraso Cierre Admisión (RCA°)"
+      id="intakeValveClosing2"
+      type="number"
+      [(value)]="engine2.intakeValveClosing"
+    ></app-input-card>
   </div>
 </div>
 

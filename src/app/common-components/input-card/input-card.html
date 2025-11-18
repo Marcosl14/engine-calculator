@@ -1,0 +1,20 @@
+<div class="input-group">
+  <label [for]="id">{{ label }}:</label>
+  <input
+    *ngIf="type !== 'select'"
+    [type]="type"
+    [id]="id"
+    [(ngModel)]="value"
+    (ngModelChange)="onValueChange($event)"
+    class="input-field"
+  />
+  <select
+    *ngIf="type === 'select'"
+    [id]="id"
+    [(ngModel)]="value"
+    (ngModelChange)="onValueChange($event)"
+    class="input-field"
+  >
+    <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+  </select>
+</div>

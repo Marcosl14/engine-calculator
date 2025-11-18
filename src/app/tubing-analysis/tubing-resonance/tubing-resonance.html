@@ -6,32 +6,30 @@
       <h3>Parámetros del Motor</h3>
 
       <div class="container grid grid-col-2">
-        <div class="input-group">
-          <label for="rpm">Revoluciones del motor (RPM):</label>
-          <input type="number" id="tubing-rpm" class="input-field" [(ngModel)]="rpm" />
-        </div>
-        <div class="input-group">
-          <label for="tubing-pistonDiameter">Diámetro del Pistón (mm):</label>
-          <input
-            type="number"
-            id="tubing-pistonDiameter"
-            class="input-field"
-            [(ngModel)]="pistonDiameter"
-          />
-        </div>
-        <div class="input-group">
-          <label for="tubing-stroke">Carrera del Motor (mm):</label>
-          <input type="number" id="tubing-stroke" class="input-field" [(ngModel)]="stroke" />
-        </div>
-        <div class="input-group">
-          <label for="volumetricEfficiency">Eficiencia Volumétrica:</label>
-          <input
-            type="number"
-            id="volumetricEfficiency"
-            class="input-field"
-            [(ngModel)]="volumetricEfficiency"
-          />
-        </div>
+        <app-input-card
+          label="Revoluciones del motor (RPM)"
+          id="tubing-rpm"
+          type="number"
+          [(value)]="rpm"
+        ></app-input-card>
+        <app-input-card
+          label="Diámetro del Pistón (mm)"
+          id="tubing-pistonDiameter"
+          type="number"
+          [(value)]="pistonDiameter"
+        ></app-input-card>
+        <app-input-card
+          label="Carrera del Motor (mm)"
+          id="tubing-stroke"
+          type="number"
+          [(value)]="stroke"
+        ></app-input-card>
+        <app-input-card
+          label="Eficiencia Volumétrica"
+          id="volumetricEfficiency"
+          type="number"
+          [(value)]="volumetricEfficiency"
+        ></app-input-card>
       </div>
     </div>
   </div>
@@ -39,198 +37,132 @@
   <div class="container flex-row">
     <div class="motor-inputs">
       <h3>Admisión</h3>
-      <div class="input-group">
-        <label for="intakeValveOpening">Avance Apertura Admisión (AAA°):</label>
-        <input
-          type="number"
-          id="intakeValveOpening"
-          class="input-field"
-          [(ngModel)]="intakeValveOpenning"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeValveClosing">Retraso Cierre Admisión (RCA°):</label>
-        <input
-          type="number"
-          id="tubing-intakeValveClosing"
-          class="input-field"
-          [(ngModel)]="intakeValveClosing"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeHarmonic">Armónico de Admisión:</label>
-        <select id="intakeHarmonic" class="input-field" [(ngModel)]="intakeHarmonic">
-          <option value="1">1</option>
-          <option value="3">3</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <label for="intakeTemperature">Temperatura de Admisión (°C):</label>
-        <input
-          type="number"
-          id="intakeTemperature"
-          class="input-field"
-          [(ngModel)]="intakeTemperature"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeAverageSpeed">Velocidad media del aire de Admisión (m/s):</label>
-        <input
-          type="number"
-          id="intakeAverageSpeed"
-          class="input-field"
-          [(ngModel)]="intakeAverageSpeed"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeValveAmount">Numero de Válvulas de Admisión:</label>
-        <input
-          type="number"
-          id="intakeValveAmount"
-          class="input-field"
-          [(ngModel)]="intakeValveAmount"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeValveDiameter">Diámetro de la Válvula de Admisión (mm):</label>
-        <input
-          type="number"
-          id="intakeValveDiameter"
-          class="input-field"
-          [(ngModel)]="intakeValveDiameter"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeValveStemDiameter"
-          >Diámetro del Vástago la Válvula de Admisión (mm):</label
-        >
-        <input
-          type="number"
-          id="intakeValveStemDiameter"
-          class="input-field"
-          [(ngModel)]="intakeValveStemDiameter"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeSeatAngle">Ángulo del asiento de la Válvula de Admisión (mm):</label>
-        <input
-          type="number"
-          id="intakeSeatAngle"
-          class="input-field"
-          [(ngModel)]="intakeSeatAngle"
-        />
-      </div>
-      <div class="input-group">
-        <label for="intakeValveSeatInnerDiameterRatio"
-          >Diámetro Interior del Asiento de Admisión (%):</label
-        >
-        <input
-          type="number"
-          id="intakeValveSeatInnerDiameterRatio"
-          class="input-field"
-          [(ngModel)]="intakeValveSeatInnerDiameterRatio"
-        />
-      </div>
+      <app-input-card
+        label="Avance Apertura Admisión (AAA°)"
+        id="intakeValveOpening"
+        type="number"
+        [(value)]="intakeValveOpenning"
+      ></app-input-card>
+      <app-input-card
+        label="Retraso Cierre Admisión (RCA°)"
+        id="tubing-intakeValveClosing"
+        type="number"
+        [(value)]="intakeValveClosing"
+      ></app-input-card>
+      <app-input-card
+        label="Armónico de Admisión"
+        id="intakeHarmonic"
+        type="select"
+        [options]="intakeHarmonicOptions"
+        [(value)]="intakeHarmonic"
+      ></app-input-card>
+      <app-input-card
+        label="Temperatura de Admisión (°C)"
+        id="intakeTemperature"
+        type="number"
+        [(value)]="intakeTemperature"
+      ></app-input-card>
+      <app-input-card
+        label="Velocidad media del aire de Admisión (m/s)"
+        id="intakeAverageSpeed"
+        type="number"
+        [(value)]="intakeAverageSpeed"
+      ></app-input-card>
+      <app-input-card
+        label="Numero de Válvulas de Admisión"
+        id="intakeValveAmount"
+        type="number"
+        [(value)]="intakeValveAmount"
+      ></app-input-card>
+      <app-input-card
+        label="Diámetro de la Válvula de Admisión (mm)"
+        id="intakeValveDiameter"
+        type="number"
+        [(value)]="intakeValveDiameter"
+      ></app-input-card>
+      <app-input-card
+        label="Diámetro del Vástago la Válvula de Admisión (mm)"
+        id="intakeValveStemDiameter"
+        type="number"
+        [(value)]="intakeValveStemDiameter"
+      ></app-input-card>
+      <app-input-card
+        label="Ángulo del asiento de la Válvula de Admisión (mm)"
+        id="intakeSeatAngle"
+        type="number"
+        [(value)]="intakeSeatAngle"
+      ></app-input-card>
+      <app-input-card
+        label="Diámetro Interior del Asiento de Admisión (%)"
+        id="intakeValveSeatInnerDiameterRatio"
+        type="number"
+        [(value)]="intakeValveSeatInnerDiameterRatio"
+      ></app-input-card>
     </div>
 
     <div class="motor-inputs">
       <h3>Escape</h3>
-      <div class="input-group">
-        <label for="intakeValveOpening">Avance Apertura Admisión (AAA°):</label>
-        <input
-          type="number"
-          id="intakeValveOpening"
-          class="input-field"
-          [(ngModel)]="intakeValveOpenning"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustValveOpenning">Avance Apertura Escape (AAE°):</label>
-        <input
-          type="number"
-          id="exhaustValveOpenning"
-          class="input-field"
-          [(ngModel)]="exhaustValveOpenning"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustHarmonic">Armónico de Escape:</label>
-        <select id="exhaustHarmonic" class="input-field" [(ngModel)]="exhaustHarmonic">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <label for="exhaustTemperature">Temperatura de Escape (°C):</label>
-        <input
-          type="number"
-          id="exhaustTemperature"
-          class="input-field"
-          [(ngModel)]="exhaustTemperature"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustAverageSpeed">Velocidad media de los gases de Escape (m/s):</label>
-        <input
-          type="number"
-          id="exhaustAverageSpeed"
-          class="input-field"
-          [(ngModel)]="exhaustAverageSpeed"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustValveAmount">Numero de Válvulas de Escape:</label>
-        <input
-          type="number"
-          id="exhaustValveAmount"
-          class="input-field"
-          [(ngModel)]="exhaustValveAmount"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustValveDiameter">Diámetro de la Válvula de Escape (mm):</label>
-        <input
-          type="number"
-          id="exhaustValveDiameter"
-          class="input-field"
-          [(ngModel)]="exhaustValveDiameter"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustValveStemDiameter"
-          >Diámetro del vástago la Válvula de Escape (mm):</label
-        >
-        <input
-          type="number"
-          id="exhaustValveStemDiameter"
-          class="input-field"
-          [(ngModel)]="exhaustValveStemDiameter"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustSeatAngle">Ángulo del asiento de la Válvula de Escape (mm):</label>
-        <input
-          type="number"
-          id="exhaustSeatAngle"
-          class="input-field"
-          [(ngModel)]="exhaustSeatAngle"
-        />
-      </div>
-      <div class="input-group">
-        <label for="exhaustValveSeatInnerDiameterRatio"
-          >Diámetro Interior del Asiento de Escape (%):</label
-        >
-        <input
-          type="number"
-          id="exhaustValveSeatInnerDiameterRatio"
-          class="input-field"
-          [(ngModel)]="exhaustValveSeatInnerDiameterRatio"
-        />
-      </div>
+      <app-input-card
+        label="Avance Apertura Admisión (AAA°)"
+        id="intakeValveOpening"
+        type="number"
+        [(value)]="intakeValveOpenning"
+      ></app-input-card>
+      <app-input-card
+        label="Avance Apertura Escape (AAE°)"
+        id="exhaustValveOpenning"
+        type="number"
+        [(value)]="exhaustValveOpenning"
+      ></app-input-card>
+      <app-input-card
+        label="Armónico de Escape"
+        id="exhaustHarmonic"
+        type="select"
+        [options]="exhaustHarmonicOptions"
+        [(value)]="exhaustHarmonic"
+      ></app-input-card>
+      <app-input-card
+        label="Temperatura de Escape (°C)"
+        id="exhaustTemperature"
+        type="number"
+        [(value)]="exhaustTemperature"
+      ></app-input-card>
+      <app-input-card
+        label="Velocidad media de los gases de Escape (m/s)"
+        id="exhaustAverageSpeed"
+        type="number"
+        [(value)]="exhaustAverageSpeed"
+      ></app-input-card>
+      <app-input-card
+        label="Numero de Válvulas de Escape"
+        id="exhaustValveAmount"
+        type="number"
+        [(value)]="exhaustValveAmount"
+      ></app-input-card>
+      <app-input-card
+        label="Diámetro de la Válvula de Escape (mm)"
+        id="exhaustValveDiameter"
+        type="number"
+        [(value)]="exhaustValveDiameter"
+      ></app-input-card>
+      <app-input-card
+        label="Diámetro del vástago la Válvula de Escape (mm)"
+        id="exhaustValveStemDiameter"
+        type="number"
+        [(value)]="exhaustValveStemDiameter"
+      ></app-input-card>
+      <app-input-card
+        label="Ángulo del asiento de la Válvula de Escape (mm)"
+        id="exhaustSeatAngle"
+        type="number"
+        [(value)]="exhaustSeatAngle"
+      ></app-input-card>
+      <app-input-card
+        label="Diámetro Interior del Asiento de Escape (%)"
+        id="exhaustValveSeatInnerDiameterRatio"
+        type="number"
+        [(value)]="exhaustValveSeatInnerDiameterRatio"
+      ></app-input-card>
     </div>
   </div>
 </div>

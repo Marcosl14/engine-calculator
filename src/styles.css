@@ -22,6 +22,11 @@ button:hover {
   background-color: #1ea125;
 }
 
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .motor-inputs {
   flex: 1;
   background-color: white;

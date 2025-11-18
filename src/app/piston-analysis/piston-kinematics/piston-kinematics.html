@@ -8,18 +8,24 @@
       id="pistonDiameter1"
       type="number"
       [(value)]="engine1.pistonDiameter"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Carrera (mm)"
       id="stroke1"
       type="number"
       [(value)]="engine1.stroke"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Largo de biela (mm)"
       id="connectingRodLength1"
       type="number"
       [(value)]="engine1.connectingRodLength"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Descentrado del perno (mm)"
@@ -32,18 +38,24 @@
       id="combustionChamberVolume1"
       type="number"
       [(value)]="engine1.combustionChamberVolume"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Revoluciones del motor (1/min o RPM)"
       id="engineRPM1"
       type="number"
       [(value)]="engine1.engineRPM"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Retraso Cierre Admisión (RCA°)"
       id="intakeValveClosing1"
       type="number"
       [(value)]="engine1.intakeValveClosing"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
   </div>
 
@@ -54,18 +66,24 @@
       id="pistonDiameter2"
       type="number"
       [(value)]="engine2.pistonDiameter"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Carrera (mm)"
       id="stroke2"
       type="number"
       [(value)]="engine2.stroke"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Largo de biela (mm)"
       id="connectingRodLength2"
       type="number"
       [(value)]="engine2.connectingRodLength"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Descentrado del perno (mm)"
@@ -78,23 +96,31 @@
       id="combustionChamberVolume2"
       type="number"
       [(value)]="engine2.combustionChamberVolume"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Revoluciones del motor (1/min o RPM)"
       id="engineRPM2"
       type="number"
       [(value)]="engine2.engineRPM"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
       label="Retraso Cierre Admisión (RCA°)"
       id="intakeValveClosing2"
       type="number"
       [(value)]="engine2.intakeValveClosing"
+      [validationFn]="validatePositiveNumber"
+      (validation)="onValidaton($event)"
     ></app-input-card>
   </div>
 </div>
 
-<button id="calculateAndGraph" (click)="calculateAndGraph()">Calcular y Graficar</button>
+<button id="calculateAndGraph" (click)="calculateAndGraph()" [disabled]="buttonDisabled">
+  Calcular y Graficar
+</button>
 
 <div
   class="container grid grid-col-2 margin-botton-10"

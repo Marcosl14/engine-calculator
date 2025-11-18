@@ -19,11 +19,32 @@ export class InputCard {
   @Input() type: string = 'text';
   @Input() options: SelectOption<string | number>[] = [];
   @Input() value: string | number | null | undefined;
+  @Input() validationFn?: (value: any) => string | null;
+  error?: string;
 
   @Output() valueChange = new EventEmitter<string | number>();
+  @Output() validation: EventEmitter<InputValidationEmitterI> =
+    new EventEmitter<InputValidationEmitterI>();
 
   onValueChange(newValue: any) {
     this.value = newValue;
+
+    if (this.validationFn) {
+      this.error = this.validationFn(newValue) ?? undefined;
+      this.validation.emit({
+        id: this.id,
+        error: this.error ? true : false,
+      });
+      if (this.error) {
+        return;
+      }
+    }
+
     this.valueChange.emit(newValue);
   }
+}
+
+export interface InputValidationEmitterI {
+  id: string;
+  error: boolean;
 }

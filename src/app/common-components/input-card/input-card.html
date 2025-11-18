@@ -17,4 +17,5 @@
   >
     <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
   </select>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
 </div>

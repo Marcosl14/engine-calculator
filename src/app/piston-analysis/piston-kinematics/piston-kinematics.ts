@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { EngineInformation, PistonMotion } from '../../methods/PistonMotion';
 import { CommonModule } from '@angular/common';
 import { ResultsCard } from '../../common-components/results-card/results-card';
-import { InputCard } from '../../common-components/input-card/input-card';
+import { InputCard, InputValidationEmitterI } from '../../common-components/input-card/input-card';
 import { ChartDataset, ScatterChart } from '../../common-components/scatter-chart/scatter-chart';
 
 enum CilinderDiameterVsStrokeRelationType {
@@ -56,6 +56,9 @@ export class PistonKinematics implements AfterViewInit {
   public rodStrokeRatio2: number | null = null;
   public rodStrokeRatioCharacteristics1: RodStrokeCharacteristics | null = null;
   public rodStrokeRatioCharacteristics2: RodStrokeCharacteristics | null = null;
+
+  public buttonDisabled: boolean = false;
+  public errors: Record<string, boolean> = {};
 
   engine1: EngineInformation = {
     pistonDiameter: 59,
@@ -251,5 +254,19 @@ export class PistonKinematics implements AfterViewInit {
 
   private generatePointSets(data: number[]): { x: number; y: number }[] {
     return data.map((value, index) => ({ x: index, y: value }));
+  }
+
+  validatePositiveNumber = (value: number): string | null => {
+    return value > 0 ? null : 'Debe ser un número positivo.';
+  };
+
+  onValidaton(event: InputValidationEmitterI) {
+    this.errors[event.id] = event.error;
+
+    if (Object.values(this.errors).every((error) => !error)) {
+      this.buttonDisabled = false;
+    } else {
+      this.buttonDisabled = true;
+    }
   }
 }

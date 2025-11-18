@@ -191,6 +191,7 @@
     title="Posición del Pistón"
     xLabel="Ángulo de giro (grados)"
     yLabel="Posición (mm)"
+    [xStepSize]="45"
   ></app-scatter-chart>
   <app-scatter-chart
     #velocityChart
@@ -198,6 +199,7 @@
     title="Velocidad del Pistón"
     xLabel="Ángulo de giro (grados)"
     yLabel="Velocidad (m/s)"
+    [xStepSize]="45"
   ></app-scatter-chart>
   <app-scatter-chart
     #accelerationChart
@@ -205,6 +207,7 @@
     title="Aceleración del Pistón"
     xLabel="Ángulo de giro (grados)"
     yLabel="Aceleración (m/s²)"
+    [xStepSize]="45"
   ></app-scatter-chart>
   <app-scatter-chart
     #volumeChart
@@ -212,5 +215,6 @@
     title="Volumen del Cilindro"
     xLabel="Ángulo de giro (grados)"
     yLabel="Volumen (cm³)"
+    [xStepSize]="45"
   ></app-scatter-chart>
 </div>

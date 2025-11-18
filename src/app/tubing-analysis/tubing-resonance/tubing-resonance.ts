@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TubingResonanceCalculator } from '../../methods/TubingResonanceCalculator';
 import { TubingFlowCalculator } from '../../methods/TubingFlowCalculator';
 import { ResultsCard } from '../../common-components/results-card/results-card';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-tubing-resonance',
@@ -22,14 +23,22 @@ export class TubingResonance implements OnInit {
   intakeValveClosing: number = 70;
   intakeHarmonic: number = 3;
   intakeTemperature: number = 50;
-  intakeValveAmount: number = 1;
   intakeAverageSpeed: number = 90;
+  intakeValveAmount: number = 1;
+  intakeValveDiameter: number = 31.5;
+  intakeValveStemDiameter: number = 5;
+  intakeSeatAngle: number = 45;
+  intakeValveSeatInnerDiameterRatio: number = 0.9;
 
   exhaustValveOpenning: number = 70;
   exhaustHarmonic: number = 2;
   exhaustTemperature: number = 900;
-  exhaustValveAmount: number = 1;
   exhaustAverageSpeed: number = 105;
+  exhaustValveAmount: number = 1;
+  exhaustValveDiameter: number = 27;
+  exhaustValveStemDiameter: number = 5;
+  exhaustSeatAngle: number = 45;
+  exhaustValveSeatInnerDiameterRatio: number = 0.9;
 
   intakeLength: number | null = null;
   exhaustLength: number | null = null;
@@ -38,8 +47,66 @@ export class TubingResonance implements OnInit {
   intakeDiameter: number | null = null;
   exhaustDiameter: number | null = null;
 
+  intakeMaxTheoricalLift: number | null = null;
+  exhaustMaxTheoricalLift: number | null = null;
+
+  private intakeFlowChart!: Chart;
+  private exhaustFlowChart!: Chart;
+
+  private readonly baseChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        title: { display: true, text: 'Levante de Válvula (mm)' },
+        type: 'linear' as const,
+        position: 'bottom' as const,
+      },
+    },
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+    },
+  };
+
   ngOnInit(): void {
+    this.initializeCharts();
     this.calculate();
+  }
+
+  private initializeCharts(): void {
+    this.intakeFlowChart = new Chart('intakeFlowChart', {
+      type: 'scatter',
+      data: { labels: [], datasets: [] },
+      options: {
+        ...this.baseChartOptions,
+        plugins: {
+          ...this.baseChartOptions.plugins,
+          title: { display: true, text: 'Área de Flujo Válvula de Admisión' },
+        },
+        scales: {
+          ...this.baseChartOptions.scales,
+          y: { title: { display: true, text: 'Área (mm²)' } },
+        },
+      },
+    });
+
+    this.exhaustFlowChart = new Chart('exhaustFlowChart', {
+      type: 'scatter',
+      data: { labels: [], datasets: [] },
+      options: {
+        ...this.baseChartOptions,
+        plugins: {
+          ...this.baseChartOptions.plugins,
+          title: { display: true, text: 'Área de Flujo Válvula de Escape' },
+        },
+        scales: {
+          ...this.baseChartOptions.scales,
+          y: { title: { display: true, text: 'Área (mm²)' } },
+        },
+      },
+    });
   }
 
   calculate(): void {
@@ -65,7 +132,7 @@ export class TubingResonance implements OnInit {
     this.exhaustSoundSpeed = exhaustResult.speedOfSound;
 
     const flowCalculator = new TubingFlowCalculator();
-    this.intakeDiameter = flowCalculator.calculateIntakeDiameter(
+    this.intakeDiameter = flowCalculator.calculatePortDiameter(
       this.rpm,
       this.pistonDiameter,
       this.stroke,
@@ -74,7 +141,7 @@ export class TubingResonance implements OnInit {
       this.intakeValveAmount
     );
 
-    this.exhaustDiameter = flowCalculator.calculateExhaustDiameter(
+    this.exhaustDiameter = flowCalculator.calculatePortDiameter(
       this.rpm,
       this.pistonDiameter,
       this.stroke,
@@ -82,5 +149,46 @@ export class TubingResonance implements OnInit {
       this.volumetricEfficiency,
       this.exhaustValveAmount
     );
+
+    const intakeFlowAreaData = flowCalculator.calculateValveFlowArea(
+      this.intakeValveDiameter,
+      this.intakeValveStemDiameter,
+      this.intakeValveSeatInnerDiameterRatio * this.intakeValveDiameter,
+      this.intakeSeatAngle
+    );
+
+    const exhaustFlowAreaData = flowCalculator.calculateValveFlowArea(
+      this.exhaustValveDiameter,
+      this.exhaustValveStemDiameter,
+      this.exhaustValveSeatInnerDiameterRatio * this.exhaustValveDiameter,
+      this.exhaustSeatAngle
+    );
+
+    this.updateChartData(
+      this.intakeFlowChart,
+      'Admisión',
+      intakeFlowAreaData.flowAreas.map(({ lift, surface }) => ({ x: lift, y: surface }))
+    );
+
+    this.intakeMaxTheoricalLift = intakeFlowAreaData.maxTheoricalLift;
+
+    this.updateChartData(
+      this.exhaustFlowChart,
+      'Escape',
+      exhaustFlowAreaData.flowAreas.map(({ lift, surface }) => ({ x: lift, y: surface }))
+    );
+
+    this.exhaustMaxTheoricalLift = exhaustFlowAreaData.maxTheoricalLift;
+  }
+
+  private updateChartData(chart: Chart, label: string, data: { x: number; y: number }[]): void {
+    chart.data.datasets = [
+      {
+        label: label,
+        data: data,
+        showLine: true,
+      },
+    ];
+    chart.update();
   }
 }

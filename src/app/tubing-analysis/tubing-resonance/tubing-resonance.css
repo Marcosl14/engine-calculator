@@ -39,3 +39,21 @@ input {
   border-radius: 4px;
   background-color: #fff;
 }
+
+.chart-wrapper {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-wrapper h3 {
+  margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}

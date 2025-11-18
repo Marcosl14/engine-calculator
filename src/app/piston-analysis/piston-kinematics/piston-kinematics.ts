@@ -173,6 +173,8 @@ export class PistonKinematics implements OnInit {
     const data1 = motion1.calculate(this.engine1);
     const data2 = motion2.calculate(this.engine2);
 
+    console.log(data1.positions[this.engine1.intakeValveClosing]);
+
     this.getCilinderDiameterVsStrokeRelation();
 
     this.getCompressionRatio(data1.volumes, data2.volumes);

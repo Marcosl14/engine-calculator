@@ -75,6 +75,15 @@
         />
       </div>
       <div class="input-group">
+        <label for="intakeAverageSpeed">Velocidad media del aire de Admisión (m/s):</label>
+        <input
+          type="number"
+          id="intakeAverageSpeed"
+          class="input-field"
+          [(ngModel)]="intakeAverageSpeed"
+        />
+      </div>
+      <div class="input-group">
         <label for="intakeValveAmount">Numero de Válvulas de Admisión:</label>
         <input
           type="number"
@@ -84,18 +93,58 @@
         />
       </div>
       <div class="input-group">
-        <label for="intakeAverageSpeed">Velocidad media del aire de Admisión (m/s):</label>
+        <label for="intakeValveDiameter">Diámetro de la Válvula de Admisión (mm):</label>
         <input
           type="number"
-          id="intakeAverageSpeed"
+          id="intakeValveDiameter"
           class="input-field"
-          [(ngModel)]="intakeAverageSpeed"
+          [(ngModel)]="intakeValveDiameter"
+        />
+      </div>
+      <div class="input-group">
+        <label for="intakeValveStemDiameter"
+          >Diámetro del Vástago la Válvula de Admisión (mm):</label
+        >
+        <input
+          type="number"
+          id="intakeValveStemDiameter"
+          class="input-field"
+          [(ngModel)]="intakeValveStemDiameter"
+        />
+      </div>
+      <div class="input-group">
+        <label for="intakeSeatAngle">Ángulo del asiento de la Válvula de Admisión (mm):</label>
+        <input
+          type="number"
+          id="intakeSeatAngle"
+          class="input-field"
+          [(ngModel)]="intakeSeatAngle"
+        />
+      </div>
+      <div class="input-group">
+        <label for="intakeValveSeatInnerDiameterRatio"
+          >Diámetro Interior del Asiento de Admisión (%):</label
+        >
+        <input
+          type="number"
+          id="intakeValveSeatInnerDiameterRatio"
+          class="input-field"
+          [(ngModel)]="intakeValveSeatInnerDiameterRatio"
         />
       </div>
     </div>
 
     <div class="motor-inputs">
       <h3>Escape</h3>
+      <div class="input-group">
+        <label for="intakeValveOpening">Avance Apertura Admisión (AAA°):</label>
+        <input
+          type="number"
+          id="intakeValveOpening"
+          class="input-field"
+          [(ngModel)]="intakeValveOpenning"
+        />
+      </div>
       <div class="input-group">
         <label for="exhaustValveOpenning">Avance Apertura Escape (AAE°):</label>
         <input
@@ -125,6 +174,15 @@
         />
       </div>
       <div class="input-group">
+        <label for="exhaustAverageSpeed">Velocidad media de los gases de Escape (m/s):</label>
+        <input
+          type="number"
+          id="exhaustAverageSpeed"
+          class="input-field"
+          [(ngModel)]="exhaustAverageSpeed"
+        />
+      </div>
+      <div class="input-group">
         <label for="exhaustValveAmount">Numero de Válvulas de Escape:</label>
         <input
           type="number"
@@ -134,12 +192,43 @@
         />
       </div>
       <div class="input-group">
-        <label for="exhaustAverageSpeed">Velocidad media de los gases de Escape (m/s):</label>
+        <label for="exhaustValveDiameter">Diámetro de la Válvula de Escape (mm):</label>
         <input
           type="number"
-          id="exhaustAverageSpeed"
+          id="exhaustValveDiameter"
           class="input-field"
-          [(ngModel)]="exhaustAverageSpeed"
+          [(ngModel)]="exhaustValveDiameter"
+        />
+      </div>
+      <div class="input-group">
+        <label for="exhaustValveStemDiameter"
+          >Diámetro del vástago la Válvula de Escape (mm):</label
+        >
+        <input
+          type="number"
+          id="exhaustValveStemDiameter"
+          class="input-field"
+          [(ngModel)]="exhaustValveStemDiameter"
+        />
+      </div>
+      <div class="input-group">
+        <label for="exhaustSeatAngle">Ángulo del asiento de la Válvula de Escape (mm):</label>
+        <input
+          type="number"
+          id="exhaustSeatAngle"
+          class="input-field"
+          [(ngModel)]="exhaustSeatAngle"
+        />
+      </div>
+      <div class="input-group">
+        <label for="exhaustValveSeatInnerDiameterRatio"
+          >Diámetro Interior del Asiento de Escape (%):</label
+        >
+        <input
+          type="number"
+          id="exhaustValveSeatInnerDiameterRatio"
+          class="input-field"
+          [(ngModel)]="exhaustValveSeatInnerDiameterRatio"
         />
       </div>
     </div>
@@ -168,6 +257,11 @@
       [value]="intakeDiameter | number : '1.2-2'"
       unit="mm"
     />
+    <app-results-card
+      title="Máxima Alzada Teórica de Admisión"
+      [value]="intakeMaxTheoricalLift | number : '1.2-2'"
+      unit="mm"
+    />
   </div>
   <div>
     <app-results-card
@@ -185,5 +279,19 @@
       [value]="exhaustDiameter | number : '1.2-2'"
       unit="mm"
     />
+    <app-results-card
+      title="Máxima Alzada Teórica de Escape"
+      [value]="exhaustMaxTheoricalLift | number : '1.2-2'"
+      unit="mm"
+    />
+  </div>
+</div>
+
+<div class="container grid grid-col-2 margin-botton-10">
+  <div class="chart-wrapper">
+    <canvas id="intakeFlowChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <canvas id="exhaustFlowChart"></canvas>
   </div>
 </div>

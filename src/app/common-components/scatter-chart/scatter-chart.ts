@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import Chart, { ChartOptions, LayoutPosition } from 'chart.js/auto';
+import Chart, { LayoutPosition } from 'chart.js/auto';
 
 export interface ChartDataset {
   label: string;
@@ -20,6 +20,8 @@ export class ScatterChart implements AfterViewInit {
   @Input() xLabel!: string;
   @Input() yLabel!: string;
   @Input() legendPosition!: LayoutPosition;
+  @Input() xStepSize?: number;
+  @Input() yStepSize?: number;
 
   private chart!: Chart;
 
@@ -55,8 +57,16 @@ export class ScatterChart implements AfterViewInit {
           x: {
             title: { display: true, text: this.xLabel },
             position: 'bottom',
+            ticks: {
+              stepSize: this.xStepSize,
+            },
           },
-          y: { title: { display: true, text: this.yLabel } },
+          y: {
+            title: { display: true, text: this.yLabel },
+            ticks: {
+              stepSize: this.yStepSize,
+            },
+          },
         },
       },
     });

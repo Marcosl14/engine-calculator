@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EngineInformation, PistonMotion } from '../../methods/PistonMotion';
 import { CommonModule } from '@angular/common';
 import { ResultsCard } from '../../common-components/results-card/results-card';
 import { InputCard, InputValidationEmitterI } from '../../common-components/input-card/input-card';
 import { ChartDataset, ScatterChart } from '../../common-components/scatter-chart/scatter-chart';
+import { InputValidations } from '../../common-services/input-validations';
 
 enum CilinderDiameterVsStrokeRelationType {
   SQUARED = 'cuadrado',
@@ -28,6 +29,7 @@ interface RodStrokeCharacteristics {
 @Component({
   selector: 'app-piston-kinematics',
   imports: [CommonModule, FormsModule, ResultsCard, ScatterChart, InputCard],
+  providers: [InputValidations],
   templateUrl: './piston-kinematics.html',
   styleUrl: './piston-kinematics.css',
 })
@@ -79,6 +81,8 @@ export class PistonKinematics implements AfterViewInit {
     engineRPM: 11000,
     intakeValveClosing: 68,
   };
+
+  constructor(public inputValidations: InputValidations) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -255,10 +259,6 @@ export class PistonKinematics implements AfterViewInit {
   private generatePointSets(data: number[]): { x: number; y: number }[] {
     return data.map((value, index) => ({ x: index, y: value }));
   }
-
-  validatePositiveNumber = (value: number): string | null => {
-    return value > 0 ? null : 'Debe ser un número positivo.';
-  };
 
   onValidaton(event: InputValidationEmitterI) {
     this.errors[event.id] = event.error;

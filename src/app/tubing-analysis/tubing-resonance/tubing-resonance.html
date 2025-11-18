@@ -11,24 +11,32 @@
           id="tubing-rpm"
           type="number"
           [(value)]="rpm"
+          [validationFns]="[inputValidations.positiveNumber]"
+          (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
           label="Diámetro del Pistón (mm)"
           id="tubing-pistonDiameter"
           type="number"
           [(value)]="pistonDiameter"
+          [validationFns]="[inputValidations.positiveNumber]"
+          (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
           label="Carrera del Motor (mm)"
           id="tubing-stroke"
           type="number"
           [(value)]="stroke"
+          [validationFns]="[inputValidations.positiveNumber]"
+          (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
           label="Eficiencia Volumétrica"
           id="volumetricEfficiency"
           type="number"
           [(value)]="volumetricEfficiency"
+          [validationFns]="[inputValidations.positiveNumber]"
+          (validation)="onValidaton($event)"
         ></app-input-card>
       </div>
     </div>
@@ -42,12 +50,16 @@
         id="intakeValveOpening"
         type="number"
         [(value)]="intakeValveOpenning"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Retraso Cierre Admisión (RCA°)"
-        id="tubing-intakeValveClosing"
+        id="intakeValveClosing"
         type="number"
         [(value)]="intakeValveClosing"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Armónico de Admisión"
@@ -61,42 +73,56 @@
         id="intakeTemperature"
         type="number"
         [(value)]="intakeTemperature"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Velocidad media del aire de Admisión (m/s)"
         id="intakeAverageSpeed"
         type="number"
         [(value)]="intakeAverageSpeed"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Numero de Válvulas de Admisión"
         id="intakeValveAmount"
         type="number"
         [(value)]="intakeValveAmount"
+        [validationFns]="[inputValidations.positiveNumber, inputValidations.integerNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Diámetro de la Válvula de Admisión (mm)"
         id="intakeValveDiameter"
         type="number"
         [(value)]="intakeValveDiameter"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Diámetro del Vástago la Válvula de Admisión (mm)"
         id="intakeValveStemDiameter"
         type="number"
         [(value)]="intakeValveStemDiameter"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Ángulo del asiento de la Válvula de Admisión (mm)"
         id="intakeSeatAngle"
         type="number"
         [(value)]="intakeSeatAngle"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Diámetro Interior del Asiento de Admisión (%)"
         id="intakeValveSeatInnerDiameterRatio"
         type="number"
         [(value)]="intakeValveSeatInnerDiameterRatio"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
     </div>
 
@@ -107,12 +133,16 @@
         id="intakeValveOpening"
         type="number"
         [(value)]="intakeValveOpenning"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Avance Apertura Escape (AAE°)"
         id="exhaustValveOpenning"
         type="number"
         [(value)]="exhaustValveOpenning"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Armónico de Escape"
@@ -126,48 +156,62 @@
         id="exhaustTemperature"
         type="number"
         [(value)]="exhaustTemperature"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Velocidad media de los gases de Escape (m/s)"
         id="exhaustAverageSpeed"
         type="number"
         [(value)]="exhaustAverageSpeed"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Numero de Válvulas de Escape"
         id="exhaustValveAmount"
         type="number"
         [(value)]="exhaustValveAmount"
+        [validationFns]="[inputValidations.positiveNumber, inputValidations.integerNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Diámetro de la Válvula de Escape (mm)"
         id="exhaustValveDiameter"
         type="number"
         [(value)]="exhaustValveDiameter"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Diámetro del vástago la Válvula de Escape (mm)"
         id="exhaustValveStemDiameter"
         type="number"
         [(value)]="exhaustValveStemDiameter"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Ángulo del asiento de la Válvula de Escape (mm)"
         id="exhaustSeatAngle"
         type="number"
         [(value)]="exhaustSeatAngle"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
         label="Diámetro Interior del Asiento de Escape (%)"
         id="exhaustValveSeatInnerDiameterRatio"
         type="number"
         [(value)]="exhaustValveSeatInnerDiameterRatio"
+        [validationFns]="[inputValidations.positiveNumber]"
+        (validation)="onValidaton($event)"
       ></app-input-card>
     </div>
   </div>
 </div>
 
-<button id="calculate" (click)="calculate()">Calcular</button>
+<button id="calculate" (click)="calculate()" [disabled]="buttonDisabled">Calcular</button>
 
 <div
   class="container grid grid-col-2 margin-botton-10"

@@ -5,12 +5,18 @@ import { TubingResonanceCalculator } from '../../methods/TubingResonanceCalculat
 import { TubingFlowCalculator } from '../../methods/TubingFlowCalculator';
 import { ResultsCard } from '../../common-components/results-card/results-card';
 import { ScatterChart } from '../../common-components/scatter-chart/scatter-chart';
-import { InputCard, SelectOption } from '../../common-components/input-card/input-card';
+import {
+  InputCard,
+  InputValidationEmitterI,
+  SelectOption,
+} from '../../common-components/input-card/input-card';
+import { InputValidations } from '../../common-services/input-validations';
 
 @Component({
   selector: 'app-tubing-resonance',
   standalone: true,
   imports: [CommonModule, FormsModule, ResultsCard, ScatterChart, InputCard],
+  providers: [InputValidations],
   templateUrl: './tubing-resonance.html',
   styleUrl: './tubing-resonance.css',
 })
@@ -51,6 +57,9 @@ export class TubingResonance implements AfterViewInit {
   intakeMaxTheoricalLift: number | null = null;
   exhaustMaxTheoricalLift: number | null = null;
 
+  public buttonDisabled: boolean = false;
+  public errors: Record<string, boolean> = {};
+
   @ViewChild('intakeFlowChart') intakeFlowChart!: ScatterChart;
   @ViewChild('exhaustFlowChart') exhaustFlowChart!: ScatterChart;
 
@@ -67,6 +76,8 @@ export class TubingResonance implements AfterViewInit {
     { value: 4, label: '4' },
     { value: 5, label: '5' },
   ];
+
+  constructor(public inputValidations: InputValidations) {}
 
   ngAfterViewInit(): void {
     this.calculate();
@@ -144,5 +155,15 @@ export class TubingResonance implements AfterViewInit {
       },
     ]);
     this.exhaustMaxTheoricalLift = exhaustFlowAreaData.maxTheoricalLift;
+  }
+
+  onValidaton(event: InputValidationEmitterI) {
+    this.errors[event.id] = event.error;
+
+    if (Object.values(this.errors).every((error) => !error)) {
+      this.buttonDisabled = false;
+    } else {
+      this.buttonDisabled = true;
+    }
   }
 }

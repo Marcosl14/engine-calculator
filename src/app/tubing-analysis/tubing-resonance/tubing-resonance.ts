@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TubingResonanceCalculator } from '../../methods/TubingResonanceCalculator';
 import { TubingFlowCalculator } from '../../methods/TubingFlowCalculator';
 import { ResultsCard } from '../../common-components/results-card/results-card';
-import Chart from 'chart.js/auto';
+import { ScatterChart } from '../../common-components/scatter-chart/scatter-chart';
 
 @Component({
   selector: 'app-tubing-resonance',
   standalone: true,
-  imports: [CommonModule, FormsModule, ResultsCard],
+  imports: [CommonModule, FormsModule, ResultsCard, ScatterChart],
   templateUrl: './tubing-resonance.html',
   styleUrl: './tubing-resonance.css',
 })
-export class TubingResonance implements OnInit {
+export class TubingResonance implements AfterViewInit {
   rpm: number = 11500;
   stroke: number = 57.8;
   pistonDiameter: number = 59;
@@ -50,63 +50,11 @@ export class TubingResonance implements OnInit {
   intakeMaxTheoricalLift: number | null = null;
   exhaustMaxTheoricalLift: number | null = null;
 
-  private intakeFlowChart!: Chart;
-  private exhaustFlowChart!: Chart;
+  @ViewChild('intakeFlowChart') intakeFlowChart!: ScatterChart;
+  @ViewChild('exhaustFlowChart') exhaustFlowChart!: ScatterChart;
 
-  private readonly baseChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        title: { display: true, text: 'Levante de Válvula (mm)' },
-        type: 'linear' as const,
-        position: 'bottom' as const,
-      },
-    },
-    plugins: {
-      legend: {
-        position: 'top' as const,
-      },
-    },
-  };
-
-  ngOnInit(): void {
-    this.initializeCharts();
+  ngAfterViewInit(): void {
     this.calculate();
-  }
-
-  private initializeCharts(): void {
-    this.intakeFlowChart = new Chart('intakeFlowChart', {
-      type: 'scatter',
-      data: { labels: [], datasets: [] },
-      options: {
-        ...this.baseChartOptions,
-        plugins: {
-          ...this.baseChartOptions.plugins,
-          title: { display: true, text: 'Área de Flujo Válvula de Admisión' },
-        },
-        scales: {
-          ...this.baseChartOptions.scales,
-          y: { title: { display: true, text: 'Área (mm²)' } },
-        },
-      },
-    });
-
-    this.exhaustFlowChart = new Chart('exhaustFlowChart', {
-      type: 'scatter',
-      data: { labels: [], datasets: [] },
-      options: {
-        ...this.baseChartOptions,
-        plugins: {
-          ...this.baseChartOptions.plugins,
-          title: { display: true, text: 'Área de Flujo Válvula de Escape' },
-        },
-        scales: {
-          ...this.baseChartOptions.scales,
-          y: { title: { display: true, text: 'Área (mm²)' } },
-        },
-      },
-    });
   }
 
   calculate(): void {
@@ -157,6 +105,15 @@ export class TubingResonance implements OnInit {
       this.intakeSeatAngle
     );
 
+    this.intakeFlowChart.update([
+      {
+        label: 'Admisión',
+        data: intakeFlowAreaData.flowAreas.map(({ lift, surface }) => ({ x: lift, y: surface })),
+        borderColor: 'rgb(75, 192, 192)',
+      },
+    ]);
+    this.intakeMaxTheoricalLift = intakeFlowAreaData.maxTheoricalLift;
+
     const exhaustFlowAreaData = flowCalculator.calculateValveFlowArea(
       this.exhaustValveDiameter,
       this.exhaustValveStemDiameter,
@@ -164,31 +121,13 @@ export class TubingResonance implements OnInit {
       this.exhaustSeatAngle
     );
 
-    this.updateChartData(
-      this.intakeFlowChart,
-      'Admisión',
-      intakeFlowAreaData.flowAreas.map(({ lift, surface }) => ({ x: lift, y: surface }))
-    );
-
-    this.intakeMaxTheoricalLift = intakeFlowAreaData.maxTheoricalLift;
-
-    this.updateChartData(
-      this.exhaustFlowChart,
-      'Escape',
-      exhaustFlowAreaData.flowAreas.map(({ lift, surface }) => ({ x: lift, y: surface }))
-    );
-
-    this.exhaustMaxTheoricalLift = exhaustFlowAreaData.maxTheoricalLift;
-  }
-
-  private updateChartData(chart: Chart, label: string, data: { x: number; y: number }[]): void {
-    chart.data.datasets = [
+    this.exhaustFlowChart.update([
       {
-        label: label,
-        data: data,
-        showLine: true,
+        label: 'Escape',
+        data: exhaustFlowAreaData.flowAreas.map(({ lift, surface }) => ({ x: lift, y: surface })),
+        borderColor: 'rgb(255, 99, 132)',
       },
-    ];
-    chart.update();
+    ]);
+    this.exhaustMaxTheoricalLift = exhaustFlowAreaData.maxTheoricalLift;
   }
 }

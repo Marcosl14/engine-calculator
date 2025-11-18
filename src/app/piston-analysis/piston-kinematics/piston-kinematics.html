@@ -149,16 +149,32 @@
 </div>
 
 <div class="container grid grid-col-2 margin-botton-10">
-  <div class="chart-wrapper">
-    <canvas id="positionChart"></canvas>
-  </div>
-  <div class="chart-wrapper">
-    <canvas id="velocityChart"></canvas>
-  </div>
-  <div class="chart-wrapper">
-    <canvas id="accelerationChart"></canvas>
-  </div>
-  <div class="chart-wrapper">
-    <canvas id="volumeChart"></canvas>
-  </div>
+  <app-scatter-chart
+    #positionChart
+    chartId="positionChart"
+    title="Posición del Pistón"
+    xLabel="Ángulo de giro (grados)"
+    yLabel="Posición (mm)"
+  ></app-scatter-chart>
+  <app-scatter-chart
+    #velocityChart
+    chartId="velocityChart"
+    title="Velocidad del Pistón"
+    xLabel="Ángulo de giro (grados)"
+    yLabel="Velocidad (m/s)"
+  ></app-scatter-chart>
+  <app-scatter-chart
+    #accelerationChart
+    chartId="accelerationChart"
+    title="Aceleración del Pistón"
+    xLabel="Ángulo de giro (grados)"
+    yLabel="Aceleración (m/s²)"
+  ></app-scatter-chart>
+  <app-scatter-chart
+    #volumeChart
+    chartId="volumeChart"
+    title="Volumen del Cilindro"
+    xLabel="Ángulo de giro (grados)"
+    yLabel="Volumen (cm³)"
+  ></app-scatter-chart>
 </div>

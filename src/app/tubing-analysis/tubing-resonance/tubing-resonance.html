@@ -288,10 +288,20 @@
 </div>
 
 <div class="container grid grid-col-2 margin-botton-10">
-  <div class="chart-wrapper">
-    <canvas id="intakeFlowChart"></canvas>
-  </div>
-  <div class="chart-wrapper">
-    <canvas id="exhaustFlowChart"></canvas>
-  </div>
+  <app-scatter-chart
+    #intakeFlowChart
+    chartId="intakeFlowChart"
+    label="Admisión"
+    title="Área de Flujo Válvula de Admisión"
+    xLabel="Levante de Válvula (mm)"
+    yLabel="Área (mm²)"
+  ></app-scatter-chart>
+  <app-scatter-chart
+    #exhaustFlowChart
+    chartId="exhaustFlowChart"
+    label="Escape"
+    title="Área de Flujo Válvula de Escape"
+    xLabel="Levante de Válvula (mm)"
+    yLabel="Área (mm²)"
+  ></app-scatter-chart>
 </div>

@@ -8,7 +8,7 @@
       id="pistonDiameter1"
       type="number"
       [(value)]="engine1.pistonDiameter"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -16,7 +16,7 @@
       id="stroke1"
       type="number"
       [(value)]="engine1.stroke"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -24,7 +24,7 @@
       id="connectingRodLength1"
       type="number"
       [(value)]="engine1.connectingRodLength"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -38,7 +38,7 @@
       id="combustionChamberVolume1"
       type="number"
       [(value)]="engine1.combustionChamberVolume"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -46,7 +46,7 @@
       id="engineRPM1"
       type="number"
       [(value)]="engine1.engineRPM"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -54,7 +54,7 @@
       id="intakeValveClosing1"
       type="number"
       [(value)]="engine1.intakeValveClosing"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
   </div>
@@ -66,7 +66,7 @@
       id="pistonDiameter2"
       type="number"
       [(value)]="engine2.pistonDiameter"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -74,7 +74,7 @@
       id="stroke2"
       type="number"
       [(value)]="engine2.stroke"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -82,7 +82,7 @@
       id="connectingRodLength2"
       type="number"
       [(value)]="engine2.connectingRodLength"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -96,7 +96,7 @@
       id="combustionChamberVolume2"
       type="number"
       [(value)]="engine2.combustionChamberVolume"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -104,7 +104,7 @@
       id="engineRPM2"
       type="number"
       [(value)]="engine2.engineRPM"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
     <app-input-card
@@ -112,7 +112,7 @@
       id="intakeValveClosing2"
       type="number"
       [(value)]="engine2.intakeValveClosing"
-      [validationFns]="[inputValidations.positiveNumber]"
+      [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
   </div>

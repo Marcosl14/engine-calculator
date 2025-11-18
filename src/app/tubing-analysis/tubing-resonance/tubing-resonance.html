@@ -11,7 +11,7 @@
           id="tubing-rpm"
           type="number"
           [(value)]="rpm"
-          [validationFns]="[inputValidations.positiveNumber]"
+          [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
           (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
@@ -19,7 +19,7 @@
           id="tubing-pistonDiameter"
           type="number"
           [(value)]="pistonDiameter"
-          [validationFns]="[inputValidations.positiveNumber]"
+          [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
           (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
@@ -27,7 +27,7 @@
           id="tubing-stroke"
           type="number"
           [(value)]="stroke"
-          [validationFns]="[inputValidations.positiveNumber]"
+          [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
           (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
@@ -35,7 +35,7 @@
           id="volumetricEfficiency"
           type="number"
           [(value)]="volumetricEfficiency"
-          [validationFns]="[inputValidations.positiveNumber]"
+          [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
           (validation)="onValidaton($event)"
         ></app-input-card>
       </div>
@@ -50,7 +50,7 @@
         id="intakeValveOpening"
         type="number"
         [(value)]="intakeValveOpenning"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -58,7 +58,7 @@
         id="intakeValveClosing"
         type="number"
         [(value)]="intakeValveClosing"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -73,7 +73,7 @@
         id="intakeTemperature"
         type="number"
         [(value)]="intakeTemperature"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -81,7 +81,7 @@
         id="intakeAverageSpeed"
         type="number"
         [(value)]="intakeAverageSpeed"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -89,7 +89,10 @@
         id="intakeValveAmount"
         type="number"
         [(value)]="intakeValveAmount"
-        [validationFns]="[inputValidations.positiveNumber, inputValidations.integerNumber]"
+        [validationFns]="[
+          inputValidations.positiveNumberBiggerThanZero,
+          inputValidations.integerNumber
+        ]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -97,7 +100,7 @@
         id="intakeValveDiameter"
         type="number"
         [(value)]="intakeValveDiameter"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -105,7 +108,7 @@
         id="intakeValveStemDiameter"
         type="number"
         [(value)]="intakeValveStemDiameter"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -113,7 +116,7 @@
         id="intakeSeatAngle"
         type="number"
         [(value)]="intakeSeatAngle"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -121,7 +124,7 @@
         id="intakeValveSeatInnerDiameterRatio"
         type="number"
         [(value)]="intakeValveSeatInnerDiameterRatio"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
     </div>
@@ -133,7 +136,7 @@
         id="intakeValveOpening"
         type="number"
         [(value)]="intakeValveOpenning"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -141,7 +144,7 @@
         id="exhaustValveOpenning"
         type="number"
         [(value)]="exhaustValveOpenning"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -156,7 +159,7 @@
         id="exhaustTemperature"
         type="number"
         [(value)]="exhaustTemperature"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -164,7 +167,7 @@
         id="exhaustAverageSpeed"
         type="number"
         [(value)]="exhaustAverageSpeed"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -172,7 +175,10 @@
         id="exhaustValveAmount"
         type="number"
         [(value)]="exhaustValveAmount"
-        [validationFns]="[inputValidations.positiveNumber, inputValidations.integerNumber]"
+        [validationFns]="[
+          inputValidations.positiveNumberBiggerThanZero,
+          inputValidations.integerNumber
+        ]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -180,7 +186,7 @@
         id="exhaustValveDiameter"
         type="number"
         [(value)]="exhaustValveDiameter"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -188,7 +194,7 @@
         id="exhaustValveStemDiameter"
         type="number"
         [(value)]="exhaustValveStemDiameter"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -196,7 +202,7 @@
         id="exhaustSeatAngle"
         type="number"
         [(value)]="exhaustSeatAngle"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
       <app-input-card
@@ -204,7 +210,7 @@
         id="exhaustValveSeatInnerDiameterRatio"
         type="number"
         [(value)]="exhaustValveSeatInnerDiameterRatio"
-        [validationFns]="[inputValidations.positiveNumber]"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
         (validation)="onValidaton($event)"
       ></app-input-card>
     </div>

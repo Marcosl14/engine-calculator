@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class InputValidations {
-  positiveNumber(value: number): string | null {
-    return value >= 0 ? null : 'Debe ser un número positivo.';
+  positiveNumberBiggerThanZero(value: number): string | null {
+    return value > 0 ? null : 'Debe ser un número mayor que cero.';
+  }
+
+  positiveNumberBiggerOrEquaThanZero(value: number): string | null {
+    return value > 0 ? null : 'Debe ser un número positivo o igual a cero.';
   }
 
   integerNumber(value: number): string | null {
     return Number.isInteger(parseFloat(value.toString())) ? null : 'Debe ser un número entero.';
-  }
-
-  biggerThanZero(value: number): string | null {
-    return value > 0 ? null : 'Debe ser mayor a cero.';
   }
 }

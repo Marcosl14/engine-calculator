@@ -7,6 +7,22 @@ import { InputCard, InputValidationEmitterI } from '../../common-components/inpu
 import { ChartDataset, ScatterChart } from '../../common-components/scatter-chart/scatter-chart';
 import { InputValidations } from '../../common-services/input-validations';
 
+enum StaticCompressionRatioType {
+  VERY_LOW = 'muy baja',
+  LOW = 'baja',
+  MODERATE = 'moderada',
+  HIGH = 'alta',
+  VERY_HIGH = 'muy alta',
+}
+
+enum DynamicCompressionRatioType {
+  VERY_LOW = 'muy baja',
+  LOW = 'baja',
+  MODERATE = 'moderada',
+  HIGH = 'alta',
+  VERY_HIGH = 'muy alta',
+}
+
 enum CilinderDiameterVsStrokeRelationType {
   SQUARED = 'cuadrado',
   UNDER_SQUARED = 'carrera larga',
@@ -21,8 +37,8 @@ enum RodStrokeRatioCharacteristicType {
   VERY_LONG = 'muy larga',
 }
 
-interface RodStrokeCharacteristics {
-  type: RodStrokeRatioCharacteristicType;
+interface RelationCharacteristics {
+  type: string;
   description: string;
 }
 
@@ -42,22 +58,25 @@ export class PistonKinematics implements AfterViewInit {
   public engine1Volume: number | null = null;
   public engine2Volume: number | null = null;
 
-  public cilinderDiameterVsStrokeRelation1: number | null = null;
-  public cilinderDiameterVsStrokeRelation2: number | null = null;
+  public cilinderDiameterVsStrokeRatio1: number | null = null;
+  public cilinderDiameterVsStrokeRatio2: number | null = null;
+  public cilinderDiameterVsStrokeRatioCharacteristics1: RelationCharacteristics | null = null;
+  public cilinderDiameterVsStrokeRatioCharacteristics2: RelationCharacteristics | null = null;
 
   public staticCompressionRatio1: number | null = null;
   public staticCompressionRatio2: number | null = null;
+  public staticCompressionRatioCharacteristics1: RelationCharacteristics | null = null;
+  public staticCompressionRatioCharacteristics2: RelationCharacteristics | null = null;
 
   public dynamicCompressionRatio1: number | null = null;
   public dynamicCompressionRatio2: number | null = null;
-
-  public cilinderDiameterVsStrokeRelation1Type: CilinderDiameterVsStrokeRelationType | null = null;
-  public cilinderDiameterVsStrokeRelation2Type: CilinderDiameterVsStrokeRelationType | null = null;
+  public dynamicCompressionRatioCharacteristics1: RelationCharacteristics | null = null;
+  public dynamicCompressionRatioCharacteristics2: RelationCharacteristics | null = null;
 
   public rodStrokeRatio1: number | null = null;
   public rodStrokeRatio2: number | null = null;
-  public rodStrokeRatioCharacteristics1: RodStrokeCharacteristics | null = null;
-  public rodStrokeRatioCharacteristics2: RodStrokeCharacteristics | null = null;
+  public rodStrokeRatioCharacteristics1: RelationCharacteristics | null = null;
+  public rodStrokeRatioCharacteristics2: RelationCharacteristics | null = null;
 
   public buttonDisabled: boolean = false;
   public errors: Record<string, boolean> = {};
@@ -166,16 +185,19 @@ export class PistonKinematics implements AfterViewInit {
     this.engine2Volume =
       (Math.PI * (this.engine2.pistonDiameter / 2) ** 2 * this.engine2.stroke) / 1000;
 
-    if (this.engine1Volume) {
-      this.staticCompressionRatio1 =
-        (this.engine1Volume + this.engine1.combustionChamberVolume) /
-        this.engine1.combustionChamberVolume;
-    }
-    if (this.engine2Volume) {
-      this.staticCompressionRatio2 =
-        (this.engine2Volume + this.engine2.combustionChamberVolume) /
-        this.engine2.combustionChamberVolume;
-    }
+    this.staticCompressionRatio1 =
+      (this.engine1Volume + this.engine1.combustionChamberVolume) /
+      this.engine1.combustionChamberVolume;
+    this.staticCompressionRatio2 =
+      (this.engine2Volume + this.engine2.combustionChamberVolume) /
+      this.engine2.combustionChamberVolume;
+
+    this.staticCompressionRatioCharacteristics1 = this.getStaticCompressionRatioCharacteristics(
+      this.staticCompressionRatio1
+    );
+    this.staticCompressionRatioCharacteristics2 = this.getStaticCompressionRatioCharacteristics(
+      this.staticCompressionRatio2
+    );
 
     const engine1DynamicVolume =
       this.engine1Volume - engine1Volumes[this.engine1.intakeValveClosing];
@@ -189,6 +211,68 @@ export class PistonKinematics implements AfterViewInit {
     this.dynamicCompressionRatio2 =
       (engine2DynamicVolume + this.engine2.combustionChamberVolume) /
       this.engine2.combustionChamberVolume;
+
+    this.dynamicCompressionRatioCharacteristics1 = this.getDynamicCompressionRatioCharacteristics(
+      this.dynamicCompressionRatio1
+    );
+
+    this.dynamicCompressionRatioCharacteristics2 = this.getDynamicCompressionRatioCharacteristics(
+      this.dynamicCompressionRatio2
+    );
+  }
+
+  private getStaticCompressionRatioCharacteristics(ratio: number): RelationCharacteristics {
+    if (ratio < 8.0)
+      return {
+        type: StaticCompressionRatioType.VERY_LOW,
+        description: 'Eficiencia pobre, para motores muy forzados o de baja calidad combustible',
+      };
+    if (ratio < 9.5)
+      return {
+        type: StaticCompressionRatioType.LOW,
+        description: 'Para turbo/supercharging moderado o combustibles de bajo octanaje',
+      };
+    if (ratio < 11.0)
+      return {
+        type: StaticCompressionRatioType.MODERATE,
+        description: 'Balance eficiencia/seguridad, combustible premium',
+      };
+    if (ratio < 13.0)
+      return {
+        type: StaticCompressionRatioType.HIGH,
+        description: 'Alta eficiencia térmica, requiere combustible de alto octanaje',
+      };
+    return {
+      type: StaticCompressionRatioType.VERY_HIGH,
+      description: 'Motores de competición atmosféricos, combustibles especiales',
+    };
+  }
+
+  private getDynamicCompressionRatioCharacteristics(ratio: number): RelationCharacteristics {
+    if (ratio < 6.5)
+      return {
+        type: DynamicCompressionRatioType.VERY_LOW,
+        description: 'Levas muy agresivas, pobre torque a bajas RPM, riesgo de combustión pobre',
+      };
+    if (ratio < 7.5)
+      return {
+        type: DynamicCompressionRatioType.LOW,
+        description: 'Para motores de altas RPM, requiere alta compresión estática',
+      };
+    if (ratio < 8.5)
+      return {
+        type: DynamicCompressionRatioType.MODERATE,
+        description: 'Balance ideal para combustible premium, buen torque medio',
+      };
+    if (ratio < 9.0)
+      return {
+        type: DynamicCompressionRatioType.HIGH,
+        description: 'Máximo torque a bajas RPM, riesgo de detonación con combustible estándar',
+      };
+    return {
+      type: DynamicCompressionRatioType.VERY_HIGH,
+      description: 'Alto riesgo de detonación, requiere combustibles especiales o etanol',
+    };
   }
 
   private getRodStrokeRation() {
@@ -205,34 +289,7 @@ export class PistonKinematics implements AfterViewInit {
     );
   }
 
-  private getCilinderDiameterVsStrokeRelation() {
-    this.cilinderDiameterVsStrokeRelation1 =
-      Math.round((this.engine1.pistonDiameter * 100) / this.engine1.stroke) / 100;
-    this.cilinderDiameterVsStrokeRelation2 =
-      Math.round((this.engine2.pistonDiameter * 100) / this.engine2.stroke) / 100;
-
-    this.cilinderDiameterVsStrokeRelation1Type = this.getCilinderDiameterVsStrokeRelationType(
-      this.cilinderDiameterVsStrokeRelation1
-    );
-    this.cilinderDiameterVsStrokeRelation2Type = this.getCilinderDiameterVsStrokeRelationType(
-      this.cilinderDiameterVsStrokeRelation2
-    );
-  }
-
-  private getCilinderDiameterVsStrokeRelationType(
-    cilinderDiameterVsStrokeRelation: number
-  ): CilinderDiameterVsStrokeRelationType {
-    switch (true) {
-      case cilinderDiameterVsStrokeRelation > 1.05:
-        return CilinderDiameterVsStrokeRelationType.OVER_SQUARED;
-      case cilinderDiameterVsStrokeRelation < 0.95:
-        return CilinderDiameterVsStrokeRelationType.UNDER_SQUARED;
-      default:
-        return CilinderDiameterVsStrokeRelationType.SQUARED;
-    }
-  }
-
-  private getRodStrokeRatioCharacteristics(ratio: number): RodStrokeCharacteristics {
+  private getRodStrokeRatioCharacteristics(ratio: number): RelationCharacteristics {
     if (ratio < 1.4)
       return {
         type: RodStrokeRatioCharacteristicType.VERY_SHORT,
@@ -254,6 +311,40 @@ export class PistonKinematics implements AfterViewInit {
       type: RodStrokeRatioCharacteristicType.VERY_LONG,
       description: 'Máxima eficiencia, baja velocidad pistón',
     };
+  }
+
+  private getCilinderDiameterVsStrokeRelation() {
+    this.cilinderDiameterVsStrokeRatio1 =
+      Math.round((this.engine1.pistonDiameter * 100) / this.engine1.stroke) / 100;
+    this.cilinderDiameterVsStrokeRatio2 =
+      Math.round((this.engine2.pistonDiameter * 100) / this.engine2.stroke) / 100;
+
+    this.cilinderDiameterVsStrokeRatioCharacteristics1 =
+      this.getCilinderDiameterVsStrokeRationCharacteristics(this.cilinderDiameterVsStrokeRatio1);
+    this.cilinderDiameterVsStrokeRatioCharacteristics2 =
+      this.getCilinderDiameterVsStrokeRationCharacteristics(this.cilinderDiameterVsStrokeRatio2);
+  }
+
+  private getCilinderDiameterVsStrokeRationCharacteristics(
+    cilinderDiameterVsStrokeRatio: number
+  ): RelationCharacteristics {
+    switch (true) {
+      case cilinderDiameterVsStrokeRatio > 1.05:
+        return {
+          type: CilinderDiameterVsStrokeRelationType.OVER_SQUARED,
+          description: 'Potencia a más altas RPM, área para válvulas grandes',
+        };
+      case cilinderDiameterVsStrokeRatio < 0.95:
+        return {
+          type: CilinderDiameterVsStrokeRelationType.UNDER_SQUARED,
+          description: 'Alto torque a bajas RPM, límite de RPM reducido',
+        };
+      default:
+        return {
+          type: CilinderDiameterVsStrokeRelationType.SQUARED,
+          description: 'Balance entre torque y potencia a altas RPM',
+        };
+    }
   }
 
   private generatePointSets(data: number[]): { x: number; y: number }[] {

@@ -132,17 +132,20 @@
     <app-results-card
       title="Factor de Compresión Estática"
       [value]="staticCompressionRatio1 | number : '1.2-2'"
-      unit=": 1"
+      [unit]="': 1 = ' + staticCompressionRatioCharacteristics1?.type?.toUpperCase()"
+      [comment]="staticCompressionRatioCharacteristics1?.description"
     />
     <app-results-card
       title="Factor de Compresión Dinámica"
       [value]="dynamicCompressionRatio1 | number : '1.2-2'"
-      unit=": 1"
+      [unit]="': 1 = ' + dynamicCompressionRatioCharacteristics1?.type?.toUpperCase()"
+      [comment]="dynamicCompressionRatioCharacteristics1?.description"
     />
     <app-results-card
       title="Diametro del Cilindro vs Carrera"
-      [value]="cilinderDiameterVsStrokeRelation1"
-      [unit]="'= ' + cilinderDiameterVsStrokeRelation1Type?.toUpperCase()"
+      [value]="cilinderDiameterVsStrokeRatio1"
+      [unit]="'= ' + cilinderDiameterVsStrokeRatioCharacteristics1?.type?.toUpperCase()"
+      [comment]="cilinderDiameterVsStrokeRatioCharacteristics1?.description"
     />
     <app-results-card
       title="Largo Biela vs Carrera"
@@ -157,17 +160,20 @@
     <app-results-card
       title="Factor de Compresión Estática"
       [value]="staticCompressionRatio2 | number : '1.2-2'"
-      unit=": 1"
+      [unit]="': 1 = ' + staticCompressionRatioCharacteristics2?.type?.toUpperCase()"
+      [comment]="staticCompressionRatioCharacteristics2?.description"
     />
     <app-results-card
       title="Factor de Compresión Dinámica"
       [value]="dynamicCompressionRatio2 | number : '1.2-2'"
-      unit=": 1"
+      [unit]="': 1 = ' + dynamicCompressionRatioCharacteristics2?.type?.toUpperCase()"
+      [comment]="dynamicCompressionRatioCharacteristics2?.description"
     />
     <app-results-card
       title="Diametro del Cilindro vs Carrera"
-      [value]="cilinderDiameterVsStrokeRelation2"
-      [unit]="'= ' + cilinderDiameterVsStrokeRelation2Type?.toUpperCase()"
+      [value]="cilinderDiameterVsStrokeRatio2"
+      [unit]="'= ' + cilinderDiameterVsStrokeRatioCharacteristics2?.type?.toUpperCase()"
+      [comment]="cilinderDiameterVsStrokeRatioCharacteristics2?.description"
     />
     <app-results-card
       title="Largo Biela vs Carrera"

@@ -83,13 +83,19 @@ export class TubingFlowCalculator {
     const limitingArea =
       valveSeatInnerFlowArea < portFlowArea ? valveSeatInnerFlowArea : portFlowArea;
     let maxTheoricalLift = 0;
+    let valueFound = false;
+
     const flowAreas = valveSeatFlowArea.map(({ lift, surface }) => {
       if (surface < limitingArea) {
-        maxTheoricalLift = lift;
         return {
           lift: lift,
           surface: surface,
         };
+      } else {
+        if (!valueFound) {
+          maxTheoricalLift = lift;
+          valueFound = true;
+        }
       }
 
       return {

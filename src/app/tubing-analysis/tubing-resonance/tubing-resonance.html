@@ -132,14 +132,6 @@
     <div class="motor-inputs">
       <h3>Escape</h3>
       <app-input-card
-        label="Avance Apertura Admisión (AAA°)"
-        id="intakeValveOpening"
-        type="number"
-        [(value)]="intakeValveOpenning"
-        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
-        (validation)="onValidaton($event)"
-      ></app-input-card>
-      <app-input-card
         label="Avance Apertura Escape (AAE°)"
         id="exhaustValveOpenning"
         type="number"

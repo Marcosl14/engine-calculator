@@ -26,7 +26,7 @@ export class InputCard {
   @Output() validation: EventEmitter<InputValidationEmitterI> =
     new EventEmitter<InputValidationEmitterI>();
 
-  onValueChange(newValue: any) {
+  onValueChange(newValue: string | number) {
     this.value = newValue;
 
     if (this.validationFns) {
@@ -45,7 +45,11 @@ export class InputCard {
       }
     }
 
-    this.valueChange.emit(newValue);
+    if (isNaN(newValue as number)) {
+      this.valueChange.emit(newValue);
+    } else {
+      this.valueChange.emit(Number(newValue));
+    }
   }
 }
 

@@ -223,46 +223,40 @@
   class="container grid grid-col-2 margin-botton-10"
   *ngIf="intakeLength !== null || exhaustLength !== null"
 >
-  <div>
+  <div class="motor-results">
+    <h3>Admisión</h3>
     <app-results-card
-      title="Velocidad Sonido Admisión"
+      title="Velocidad Sonido"
       [value]="intakeSoundSpeed | number : '1.2-2'"
       unit="m/s"
     />
+    <app-results-card title="Largo" [value]="intakeLength | number : '1.2-2'" unit="cm" />
     <app-results-card
-      title="Largo de Admisión"
-      [value]="intakeLength | number : '1.2-2'"
-      unit="cm"
-    />
-    <app-results-card
-      title="Diámetro del Tubo de Admisión"
+      title="Diámetro del Tubo"
       [value]="intakeDiameter | number : '1.2-2'"
       unit="mm"
     />
     <app-results-card
-      title="Máxima Alzada Teórica de Admisión"
+      title="Máxima Alzada Teórica"
       [value]="intakeMaxTheoricalLift | number : '1.2-2'"
       unit="mm"
     />
   </div>
-  <div>
+  <div class="motor-results">
+    <h3>Escape</h3>
     <app-results-card
-      title="Velocidad Sonido Escape"
+      title="Velocidad Sonido"
       [value]="exhaustSoundSpeed | number : '1.2-2'"
       unit="m/s"
     />
+    <app-results-card title="Largo" [value]="exhaustLength | number : '1.2-2'" unit="cm" />
     <app-results-card
-      title="Largo de Escape"
-      [value]="exhaustLength | number : '1.2-2'"
-      unit="cm"
-    />
-    <app-results-card
-      title="Diámetro del Tubo de Escape"
+      title="Diámetro del Tubo"
       [value]="exhaustDiameter | number : '1.2-2'"
       unit="mm"
     />
     <app-results-card
-      title="Máxima Alzada Teórica de Escape"
+      title="Máxima Alzada Teórica"
       [value]="exhaustMaxTheoricalLift | number : '1.2-2'"
       unit="mm"
     />

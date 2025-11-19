@@ -126,12 +126,9 @@
   class="container grid grid-col-2 margin-botton-10"
   *ngIf="engine1Volume !== null && engine2Volume !== null"
 >
-  <div>
-    <app-results-card
-      title="Volumen Motor 1"
-      [value]="engine1Volume | number : '1.2-2'"
-      unit="cm³"
-    />
+  <div class="motor-results">
+    <h3>Motor 1</h3>
+    <app-results-card title="Volumen" [value]="engine1Volume | number : '1.2-2'" unit="cm³" />
     <app-results-card
       title="Factor de Compresión Estática"
       [value]="staticCompressionRatio1 | number : '1.2-2'"
@@ -154,12 +151,9 @@
       [comment]="rodStrokeRatioCharacteristics1?.description"
     />
   </div>
-  <div>
-    <app-results-card
-      title="Volumen Motor 2"
-      [value]="engine2Volume | number : '1.2-2'"
-      unit="cm³"
-    />
+  <div class="motor-results">
+    <h3>Motor 2</h3>
+    <app-results-card title="Volumen" [value]="engine2Volume | number : '1.2-2'" unit="cm³" />
     <app-results-card
       title="Factor de Compresión Estática"
       [value]="staticCompressionRatio2 | number : '1.2-2'"

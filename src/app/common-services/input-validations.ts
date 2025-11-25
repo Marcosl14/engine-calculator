@@ -15,4 +15,12 @@ export class InputValidations {
   integerNumber(value: number): string | null {
     return Number.isInteger(parseFloat(value.toString())) ? null : 'Debe ser un número entero.';
   }
+
+  lessThanOrEqualTo(value: number, max: number): string | null {
+    return value <= max ? null : `Debe ser un número menor o igual a ${max}.`;
+  }
+
+  greaterThanOrEqualTo(value: number, min: number): string | null {
+    return value >= min ? null : `Debe ser un número mayor o igual a ${min}.`;
+  }
 }

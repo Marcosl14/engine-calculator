@@ -57,6 +57,14 @@
       [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
+    <app-input-card
+      label="Eficiencia Volumétrica (%)"
+      id="volumetricEfficiency1"
+      type="number"
+      [(value)]="engine1.volumetricEfficiency"
+      [validationFns]="[minVolumetricEfficiency, maxVolumetricEfficiency]"
+      (validation)="onValidaton($event)"
+    ></app-input-card>
   </div>
 
   <div class="motor-inputs">
@@ -115,6 +123,14 @@
       [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
       (validation)="onValidaton($event)"
     ></app-input-card>
+    <app-input-card
+      label="Eficiencia Volumétrica (%)"
+      id="volumetricEfficiency2"
+      type="number"
+      [(value)]="engine2.volumetricEfficiency"
+      [validationFns]="[minVolumetricEfficiency, maxVolumetricEfficiency]"
+      (validation)="onValidaton($event)"
+    ></app-input-card>
   </div>
 </div>
 
@@ -153,6 +169,11 @@
       [unit]="'= ' + rodStrokeRatioCharacteristics1?.type?.toUpperCase()"
       [comment]="rodStrokeRatioCharacteristics1?.description"
     />
+    <app-results-card
+      title="Potencia estimada del motor (HP)"
+      [value]="engine1Power | number : '1.2-2'"
+      unit="HP"
+    />
   </div>
   <div class="motor-results">
     <h3>Motor 2</h3>
@@ -180,6 +201,11 @@
       [value]="rodStrokeRatio2 | number : '1.2-2'"
       [unit]="'= ' + rodStrokeRatioCharacteristics2?.type?.toUpperCase()"
       [comment]="rodStrokeRatioCharacteristics2?.description"
+    />
+    <app-results-card
+      title="Potencia estimada del motor (HP)"
+      [value]="engine2Power | number : '1.2-2'"
+      unit="HP"
     />
   </div>
 </div>

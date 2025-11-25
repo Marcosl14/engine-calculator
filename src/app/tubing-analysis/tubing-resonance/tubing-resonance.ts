@@ -21,10 +21,10 @@ import { InputValidations } from '../../common-services/input-validations';
   styleUrl: './tubing-resonance.css',
 })
 export class TubingResonance implements AfterViewInit {
-  rpm: number = 11500;
+  rpm: number = 10500;
   stroke: number = 57.8;
   pistonDiameter: number = 59;
-  volumetricEfficiency: number = 0.95;
+  volumetricEfficiency: number = 90;
 
   intakeValveOpenning: number = 40;
   intakeValveClosing: number = 70;
@@ -35,7 +35,7 @@ export class TubingResonance implements AfterViewInit {
   intakeValveDiameter: number = 31.5;
   intakeValveStemDiameter: number = 5;
   intakeSeatAngle: number = 45;
-  intakeValveSeatInnerDiameterRatio: number = 0.9;
+  intakeValveSeatInnerDiameterRatio: number = 90;
 
   exhaustValveOpenning: number = 70;
   exhaustHarmonic: number = 2;
@@ -45,7 +45,7 @@ export class TubingResonance implements AfterViewInit {
   exhaustValveDiameter: number = 27;
   exhaustValveStemDiameter: number = 5;
   exhaustSeatAngle: number = 45;
-  exhaustValveSeatInnerDiameterRatio: number = 0.9;
+  exhaustValveSeatInnerDiameterRatio: number = 90;
 
   intakeLength: number | null = null;
   exhaustLength: number | null = null;
@@ -127,7 +127,7 @@ export class TubingResonance implements AfterViewInit {
     const intakeFlowAreaData = flowCalculator.calculateValveFlowArea(
       this.intakeValveDiameter,
       this.intakeValveStemDiameter,
-      this.intakeValveSeatInnerDiameterRatio * this.intakeValveDiameter,
+      (this.intakeValveSeatInnerDiameterRatio * this.intakeValveDiameter) / 100,
       this.intakeSeatAngle
     );
 
@@ -143,7 +143,7 @@ export class TubingResonance implements AfterViewInit {
     const exhaustFlowAreaData = flowCalculator.calculateValveFlowArea(
       this.exhaustValveDiameter,
       this.exhaustValveStemDiameter,
-      this.exhaustValveSeatInnerDiameterRatio * this.exhaustValveDiameter,
+      (this.exhaustValveSeatInnerDiameterRatio * this.exhaustValveDiameter) / 100,
       this.exhaustSeatAngle
     );
 
@@ -166,4 +166,20 @@ export class TubingResonance implements AfterViewInit {
       this.buttonDisabled = true;
     }
   }
+
+  minVolumetricEfficiency = (value: number): string | null => {
+    return this.inputValidations.greaterThanOrEqualTo(value, 50);
+  };
+
+  maxVolumetricEfficiency = (value: number): string | null => {
+    return this.inputValidations.lessThanOrEqualTo(value, 200);
+  };
+
+  minInnerDiameterRatio = (value: number): string | null => {
+    return this.inputValidations.greaterThanOrEqualTo(value, 65);
+  };
+
+  maxInnerDiameterRatio = (value: number): string | null => {
+    return this.inputValidations.lessThanOrEqualTo(value, 95);
+  };
 }

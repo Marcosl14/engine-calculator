@@ -124,6 +124,7 @@ export interface EngineInformation {
   combustionChamberVolume: number;
   engineRPM: number;
   intakeValveClosing: number;
+  volumetricEfficiency: number;
 }
 
 export interface EngineMotionData {

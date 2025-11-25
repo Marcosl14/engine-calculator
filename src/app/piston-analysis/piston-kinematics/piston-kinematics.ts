@@ -78,6 +78,9 @@ export class PistonKinematics implements AfterViewInit {
   public rodStrokeRatioCharacteristics1: RelationCharacteristics | null = null;
   public rodStrokeRatioCharacteristics2: RelationCharacteristics | null = null;
 
+  public engine1Power: number | null = null;
+  public engine2Power: number | null = null;
+
   public buttonDisabled: boolean = false;
   public errors: Record<string, boolean> = {};
 
@@ -87,8 +90,9 @@ export class PistonKinematics implements AfterViewInit {
     connectingRodLength: 96,
     pistonOffset: 0,
     combustionChamberVolume: 13,
-    engineRPM: 11000,
+    engineRPM: 10500,
     intakeValveClosing: 70,
+    volumetricEfficiency: 90,
   };
 
   engine2: EngineInformation = {
@@ -97,8 +101,9 @@ export class PistonKinematics implements AfterViewInit {
     connectingRodLength: 96,
     pistonOffset: 0,
     combustionChamberVolume: 13,
-    engineRPM: 11000,
+    engineRPM: 10500,
     intakeValveClosing: 68,
+    volumetricEfficiency: 90,
   };
 
   constructor(public inputValidations: InputValidations) {}
@@ -121,6 +126,8 @@ export class PistonKinematics implements AfterViewInit {
     this.getCompressionRatio(data1.volumes, data2.volumes);
 
     this.getRodStrokeRation();
+
+    this.getEnginesPower();
 
     const datasets1: ChartDataset[] = [
       {
@@ -347,6 +354,23 @@ export class PistonKinematics implements AfterViewInit {
     }
   }
 
+  private getEnginesPower() {
+    this.engine1Power = this.getEnginePower(
+      this.engine1Volume!,
+      this.engine1.engineRPM,
+      this.engine1.volumetricEfficiency
+    );
+    this.engine2Power = this.getEnginePower(
+      this.engine2Volume!,
+      this.engine2.engineRPM,
+      this.engine2.volumetricEfficiency
+    );
+  }
+
+  private getEnginePower(volumeCm3: number, rpm: number, volumetricEfficiency: number): number {
+    return ((volumeCm3 / 1000000) * (rpm / 60) * (volumetricEfficiency / 100) * 1500) / 2;
+  }
+
   private generatePointSets(data: number[]): { x: number; y: number }[] {
     return data.map((value, index) => ({ x: index, y: value }));
   }
@@ -360,4 +384,12 @@ export class PistonKinematics implements AfterViewInit {
       this.buttonDisabled = true;
     }
   }
+
+  minVolumetricEfficiency = (value: number): string | null => {
+    return this.inputValidations.greaterThanOrEqualTo(value, 50);
+  };
+
+  maxVolumetricEfficiency = (value: number): string | null => {
+    return this.inputValidations.lessThanOrEqualTo(value, 200);
+  };
 }

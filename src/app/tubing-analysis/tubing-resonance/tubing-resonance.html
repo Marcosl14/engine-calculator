@@ -8,7 +8,7 @@
       <div class="container grid grid-col-2">
         <app-input-card
           label="Revoluciones del motor (RPM)"
-          id="tubing-rpm"
+          id="rpm"
           type="number"
           [(value)]="rpm"
           [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
@@ -16,7 +16,7 @@
         ></app-input-card>
         <app-input-card
           label="Diámetro del Pistón (mm)"
-          id="tubing-pistonDiameter"
+          id="pistonDiameter"
           type="number"
           [(value)]="pistonDiameter"
           [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
@@ -24,18 +24,18 @@
         ></app-input-card>
         <app-input-card
           label="Carrera del Motor (mm)"
-          id="tubing-stroke"
+          id="stroke"
           type="number"
           [(value)]="stroke"
           [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
           (validation)="onValidaton($event)"
         ></app-input-card>
         <app-input-card
-          label="Eficiencia Volumétrica"
+          label="Eficiencia Volumétrica (%)"
           id="volumetricEfficiency"
           type="number"
           [(value)]="volumetricEfficiency"
-          [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
+          [validationFns]="[minVolumetricEfficiency, maxVolumetricEfficiency]"
           (validation)="onValidaton($event)"
         ></app-input-card>
       </div>
@@ -124,13 +124,21 @@
         id="intakeValveSeatInnerDiameterRatio"
         type="number"
         [(value)]="intakeValveSeatInnerDiameterRatio"
-        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
+        [validationFns]="[minInnerDiameterRatio, maxInnerDiameterRatio]"
         (validation)="onValidaton($event)"
       ></app-input-card>
     </div>
 
     <div class="motor-inputs">
       <h3>Escape</h3>
+      <app-input-card
+        label="Avance Apertura Admisión (AAA°)"
+        id="intakeValveOpening"
+        type="number"
+        [(value)]="intakeValveOpenning"
+        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
+        (validation)="onValidaton($event)"
+      ></app-input-card>
       <app-input-card
         label="Avance Apertura Escape (AAE°)"
         id="exhaustValveOpenning"
@@ -202,7 +210,7 @@
         id="exhaustValveSeatInnerDiameterRatio"
         type="number"
         [(value)]="exhaustValveSeatInnerDiameterRatio"
-        [validationFns]="[inputValidations.positiveNumberBiggerThanZero]"
+        [validationFns]="[minInnerDiameterRatio, maxInnerDiameterRatio]"
         (validation)="onValidaton($event)"
       ></app-input-card>
     </div>

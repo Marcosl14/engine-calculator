@@ -5,7 +5,7 @@ export class TubingFlowCalculator {
    * @param pistonDiameter - Diameter of the piston in mm.
    * @param stroke - Stroke length in mm.
    * @param averageGasSpeed - Average gas speed in m/s (75-95).
-   * @param volumetricEfficiency - Volumetric efficiency (0.8-1.2).
+   * @param volumetricEfficiency - Volumetric efficiency (80-120 %).
    * @param valveAmount - Number of valves.
    * @returns The calculated diameter in milimeters.
    */
@@ -17,9 +17,11 @@ export class TubingFlowCalculator {
     volumetricEfficiency: number,
     valveAmount: number
   ): number {
+    console.log(rpm, pistonDiameter, stroke, averageGasSpeed, volumetricEfficiency, valveAmount);
+
     const cilinderVolume = stroke * Math.PI * Math.pow(pistonDiameter / 2, 2);
 
-    const volumetricFlow = (rpm * volumetricEfficiency * cilinderVolume) / 120;
+    const volumetricFlow = (rpm * volumetricEfficiency * cilinderVolume) / 12000;
 
     return 2 * Math.sqrt(volumetricFlow / (250 * Math.PI * averageGasSpeed * valveAmount));
   }
